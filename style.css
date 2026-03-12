@@ -1,89 +1,95 @@
 body{
-    margin:0;
-    font-family: Arial, Helvetica, sans-serif;
-    background:#0f172a;
-    color:#e5e7eb;
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#0f172a;
+color:#e5e7eb;
+line-height:1.6;
 }
 
 header{
-    background:#020617;
-    padding:20px 60px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+background:#020617;
+padding:20px 60px;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
 .logo{
-    font-size:22px;
-    font-weight:bold;
-    color:#14b8a6;
+font-size:24px;
+font-weight:bold;
+color:#14b8a6;
 }
 
 nav a{
-    margin-left:25px;
-    text-decoration:none;
-    color:#e5e7eb;
-    font-size:15px;
+margin-left:25px;
+text-decoration:none;
+color:#e5e7eb;
+font-size:15px;
 }
 
 nav a:hover{
-    color:#14b8a6;
+color:#14b8a6;
 }
 
 .hero{
-    padding:100px 80px;
-    max-width:900px;
+padding:120px 80px;
+max-width:900px;
 }
 
 .hero h1{
-    font-size:48px;
-    line-height:1.2;
+font-size:54px;
+line-height:1.2;
+margin-bottom:20px;
 }
 
 .hero p{
-    font-size:20px;
-    margin-top:20px;
-    color:#cbd5f5;
+font-size:20px;
+color:#cbd5f5;
 }
 
 .button{
-    display:inline-block;
-    margin-top:30px;
-    padding:12px 25px;
-    background:#14b8a6;
-    color:#020617;
-    text-decoration:none;
-    font-weight:bold;
+display:inline-block;
+margin-top:30px;
+padding:14px 28px;
+background:#14b8a6;
+color:#020617;
+text-decoration:none;
+font-weight:bold;
+border-radius:4px;
 }
 
 .section{
-    padding:70px 80px;
+padding:80px;
+max-width:1200px;
 }
 
 .section h2{
-    font-size:32px;
-    margin-bottom:25px;
+font-size:34px;
+margin-bottom:30px;
 }
 
 .card-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:30px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
 }
 
 .card{
-    background:#1e293b;
-    padding:25px;
-    border-radius:6px;
+background:#1e293b;
+padding:25px;
+border-radius:6px;
 }
 
 .card h3{
-    margin-top:0;
+margin-top:0;
+color:#14b8a6;
 }
 
 footer{
-    text-align:center;
-    padding:40px;
-    background:#020617;
-    margin-top:60px;
+text-align:center;
+padding:40px;
+background:#020617;
+margin-top:60px;
+font-size:14px;
+color:#94a3b8;
 }
