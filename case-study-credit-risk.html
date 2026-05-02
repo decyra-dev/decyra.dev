@@ -1,179 +1,133 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-<title>AI Credit Risk Platform | Decyra</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Credit Risk Platform | Decyra Case Study</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
 <header>
-<div class="logo">
-  <a href="index.html">
-    <img src="images/Decyra_logo.png" style="height:50px;">
-  </a>
-</div>
-
-<nav>
-<a href="index.html">Home</a>
-<a href="services.html">Services</a>
-<a href="architectures.html">Architectures</a>
-<a href="use-cases.html">Use Cases</a>
-<a href="case-studies.html">Case Studies</a>
-<a href="about.html">About</a>
-<a href="insights.html">Insights</a>
-<a href="contact.html">Contact</a>
-</nav>
+    <div class="header-container">
+        <a href="index.html" class="logo">
+            <img src="images/Decyra_logo.png" alt="Decyra Logo" style="height:45px;">
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="architectures.html">Architectures</a>
+            <a href="use-cases.html">Use Cases</a>
+            <a href="case-studies.html" class="active">Case Studies</a>
+            <a href="contact.html" class="cta-link">Request Consultation</a>
+        </nav>
+    </div>
 </header>
 
+<main>
+    <!-- HERO -->
+    <section class="hero-impact">
+        <div class="container">
+            <span class="label" style="color: var(--accent); margin-bottom: 20px; display: block;">BFS Case Study</span>
+            <h1>Cognitive Underwriting: <br>Augmented Credit Risk Decisioning</h1>
+            <p class="subtitle">
+                Modernizing credit evaluation by bridging structured financial metrics with LLM-driven contextual insights.
+            </p>
+        </div>
+    </section>
 
-<!-- HERO -->
+    <!-- EXECUTIVE SUMMARY BAR -->
+    <section class="summary-bar">
+        <div class="grid-3">
+            <div class="summary-item">
+                <small>Domain</small>
+                <p>Banking & Financial Services</p>
+            </div>
+            <div class="summary-item">
+                <small>Objective</small>
+                <p>Decision Acceleration & Governance</p>
+            </div>
+            <div class="summary-item">
+                <small>Impact</small>
+                <p>70% Faster Turnaround Time</p>
+            </div>
+        </div>
+    </section>
 
-<section class="case-hero">
+    <div class="content-wrapper">
+        
+        <!-- SECTION 01: THE CHALLENGE -->
+        <section class="case-block">
+            <div class="label">01. The Challenge</div>
+            <div class="content">
+                <h2>The Manual Bottleneck</h2>
+                <p>Credit risk analysts were burdened by manual reviews of fragmented financial statements and diverse customer data. This "human-only" process resulted in high operational costs, inconsistent risk evaluations, and an inability to scale during peak cycles.</p>
+                <p>Legacy systems relied on <strong>static rule sets</strong>, failing to capture the nuance found in unstructured supporting documents.</p>
+            </div>
+        </section>
 
-<h1>AI-Driven Credit Risk Decision Platform</h1>
+        <!-- SECTION 02: THE ARCHITECTURE -->
+        <section class="case-block" style="background: var(--bg-surface);">
+            <div class="label">02. Architecture</div>
+            <div class="content">
+                <h2>A Governed Decision Layer</h2>
+                <p>We implemented a high-performance architecture on <strong>Snowflake</strong>, ensuring that all AI-driven insights remain auditable and secure.</p>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Hybrid RAG Pipelines</h3>
+                        <p>Contextual document understanding that extracts risk signals from unstructured financial reports.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Risk Summarization</h3>
+                        <p>LLM-based synthesis of financial health, identifying red flags that traditional rules-based systems miss.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Human-in-the-Loop</h3>
+                        <p>Strict orchestration workflows where AI suggests and humans validate, preserving regulatory accountability.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<p style="font-size:18px;">
-Transforming manual underwriting into AI-assisted decision systems
-</p>
+        <!-- SECTION 03: OUTCOME -->
+        <section class="case-block">
+            <div class="label">03. Business Value</div>
+            <div class="content">
+                <h2>Operational Excellence</h2>
+                <div class="results-grid">
+                    <div class="result-box">
+                        <span class="value">70%</span>
+                        <p>Reduction in decision latency.</p>
+                    </div>
+                    <div class="result-box">
+                        <span class="value">Uniform</span>
+                        <p>Risk assessment consistency.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-</section>
+        <!-- SECTION 04: KEY INSIGHT -->
+        <section class="case-block" style="border-top: 1px solid var(--border);">
+            <div class="label" style="color: var(--accent);">Strategic Insight</div>
+            <div class="content">
+                <p class="subtitle" style="font-style: italic; color: var(--text-main);">
+                    "The strategic shift was not the automation of underwriting, but the <strong>augmentation</strong> of human intelligence—ensuring speed without sacrificing the regulatory rigor required in financial services."
+                </p>
+            </div>
+        </section>
 
-
-<div class="case-container">
-
-
-<!-- CONTEXT -->
-
-<div class="case-section">
-
-<p><strong>Industry:</strong> Banking & Financial Services</p>
-
-<p>
-This engagement focused on modernizing credit risk evaluation by
-augmenting traditional underwriting with AI-driven insights.
-</p>
-
-</div>
-
-
-<!-- PROBLEM -->
-
-<div class="case-section">
-
-<h3>The Problem</h3>
-
-<p>
-Credit risk analysts were manually reviewing financial statements,
-customer data and supporting documents. This resulted in slow
-decision cycles, inconsistent evaluations and limited scalability.
-</p>
-
-<p>
-Existing systems relied heavily on static rules and reports, lacking
-the ability to combine structured financial data with unstructured
-documents for contextual decision-making.
-</p>
-
-</div>
-
-
-<!-- APPROACH -->
-
-<div class="case-section">
-
-<h3>The Approach</h3>
-
-<p>
-Designed an AI-assisted decision platform combining enterprise data
-with LLM-driven analysis to support faster and more consistent
-credit risk evaluation.
-</p>
-
-<ul>
-<li>Integrated financial data, customer profiles and document sources</li>
-<li>Implemented RAG pipelines for contextual document understanding</li>
-<li>Enabled LLM-based summarization of financial risk signals</li>
-<li>Designed human-in-the-loop workflows for validation and governance</li>
-</ul>
-
-</div>
-
-
-<!-- ARCHITECTURE -->
-
-<div class="case-section">
-
-<h3>Architecture Highlights</h3>
-
-<ul>
-<li>Snowflake-based governed data platform for unified data access</li>
-<li>Secure ingestion of financial and document data</li>
-<li>Vector-based retrieval for contextual analysis</li>
-<li>LLM integration for risk summarization and insights</li>
-<li>Workflow orchestration for underwriting processes</li>
-</ul>
-
-</div>
-
-
-<!-- CONSIDERATIONS -->
-
-<div class="case-section">
-
-<h3>Architecture Considerations</h3>
-
-<ul>
-<li>Balancing explainability vs model-driven insights</li>
-<li>Ensuring regulatory compliance and auditability</li>
-<li>Maintaining data security and controlled access</li>
-<li>Reducing hallucination risk in financial decision contexts</li>
-</ul>
-
-</div>
-
-
-<!-- OUTCOME -->
-
-<div class="case-section">
-
-<h3>Outcome</h3>
-
-<ul>
-<li>60–70% reduction in credit decision turnaround time</li>
-<li>Improved consistency in risk assessment across analysts</li>
-<li>Scalable underwriting operations with AI assistance</li>
-<li>Enhanced ability to process complex financial data and documents</li>
-</ul>
-
-</div>
-
-
-<!-- KEY INSIGHT -->
-
-<div class="case-section" style="border-left:4px solid #14b8a6;">
-
-<h3>Key Insight</h3>
-
-<p>
-The biggest shift was not automating underwriting, but augmenting
-decision-making with AI while preserving human oversight and
-regulatory control.
-</p>
-
-</div>
-
-
-</div>
-
+    </div>
+</main>
 
 <footer>
-
-© 2026 Decyra | Data & AI Architecture Advisory
-
+    <div class="footer-container">
+        <p>© 2026 Decyra | Data & AI Architecture Advisory</p>
+        <a href="contact.html">Request a Technical deep-dive →</a>
+    </div>
 </footer>
 
 </body>
-
 </html>
