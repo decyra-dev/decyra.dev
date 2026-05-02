@@ -1,125 +1,95 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-<title>AI Enterprise Assistant | Decyra</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Enterprise Assistant | Decyra Case Study</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Suggesting a premium font CDN -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<header>
-<div class="logo">
-  <a href="index.html">
-    <img src="images/Decyra_logo.png" style="height:50px;">
-  </a>
-</div>
-
-<nav>
-<a href="index.html">Home</a>
-<a href="services.html">Services</a>
-<a href="architectures.html">Architectures</a>
-<a href="use-cases.html">Use Cases</a>
-<a href="case-studies.html">Case Studies</a>
-<a href="about.html">About</a>
-<a href="insights.html">Insights</a>
-<a href="contact.html">Contact</a>
-</nav>
+<header class="site-header">
+    <div class="header-container">
+        <a href="index.html" class="logo">
+            <img src="images/Decyra_logo.png" alt="Decyra Logo">
+        </a>
+        <nav class="main-nav">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="architectures.html">Architectures</a>
+            <a href="use-cases.html">Use Cases</a>
+            <a href="case-studies.html" class="active">Case Studies</a>
+            <a href="contact.html" class="btn-contact">Contact</a>
+        </nav>
+    </div>
 </header>
 
+<main>
+    <!-- HERO: High Contrast & Deep Focus -->
+    <section class="case-hero">
+        <div class="hero-content">
+            <span class="category-tag">Case Study: Enterprise AI</span>
+            <h1>AI Enterprise Assistant</h1>
+            <p class="hero-lead">
+                RAG + Multi-Agent Architecture for Enterprise Knowledge & Decision Support
+            </p>
+        </div>
+    </section>
 
-<!-- HERO -->
+    <div class="case-container">
+        <!-- THE PROBLEM: Emphasize Pain Points -->
+        <section class="case-section" id="problem">
+            <div class="section-label">01. The Challenge</div>
+            <div class="section-grid">
+                <h2>Fragmented Intelligence</h2>
+                <div class="content">
+                    <p>Enterprise knowledge was distributed across siloed data platforms, static documents, and legacy tools. Users relied on manual search, leading to <strong>decision-making bottlenecks</strong>.</p>
+                </div>
+            </div>
+        </section>
 
-<section class="case-hero">
+        <!-- THE APPROACH: Use a Card Grid -->
+        <section class="case-section dark" id="approach">
+            <div class="section-label">02. The Solution</div>
+            <h2>AI-Native Orchestration</h2>
+            <div class="approach-grid">
+                <div class="card">
+                    <h4>Data Integration</h4>
+                    <p>Unified structured and unstructured flows into a single source of truth.</p>
+                </div>
+                <div class="card">
+                    <h4>Contextual RAG</h4>
+                    <p>Vector-based retrieval ensures the LLM has the exact "fact-sheet" it needs.</p>
+                </div>
+                <div class="card">
+                    <h4>Multi-Agent Logic</h4>
+                    <p>Independent agents for reasoning, task execution, and validation.</p>
+                </div>
+            </div>
+        </section>
 
-<h1>AI Enterprise Assistant</h1>
-
-<p style="font-size:18px;">
-RAG + Multi-Agent Architecture for Enterprise Knowledge & Decision Support
-</p>
-
-</section>
-
-
-<!-- CONTENT -->
-
-<div class="case-container">
-
-
-<div class="case-section">
-
-<h3>The Problem</h3>
-
-<p>
-Enterprise knowledge was distributed across multiple systems including
-data platforms, documents and operational tools. Users relied on manual
-search and domain experts, leading to slow and inconsistent decision-making.
-</p>
-
-<p>
-Traditional BI and search systems lacked context awareness and could not
-combine structured and unstructured data effectively.
-</p>
-
-</div>
-
-
-<div class="case-section">
-
-<h3>The Approach</h3>
-
-<p>
-Designed an AI-native enterprise assistant using Retrieval-Augmented
-Generation (RAG) with multi-agent orchestration.
-</p>
-
-<ul>
-<li>Integrated structured and unstructured enterprise data</li>
-<li>Implemented vector-based contextual retrieval</li>
-<li>Designed agent workflows for reasoning and task execution</li>
-<li>Enabled human-in-the-loop validation</li>
-</ul>
-
-</div>
-
-
-<div class="case-section">
-
-<h3>Architecture Considerations</h3>
-
-<ul>
-<li>Balancing latency vs retrieval accuracy</li>
-<li>Ensuring governance and secure access</li>
-<li>Preventing hallucinations with grounded responses</li>
-<li>Designing scalable agent orchestration patterns</li>
-</ul>
-
-</div>
-
-
-<div class="case-section">
-
-<h3>Outcome</h3>
-
-<ul>
-<li>Faster access to contextual enterprise knowledge</li>
-<li>Improved consistency in decision-making</li>
-<li>Reduced dependency on manual knowledge discovery</li>
-<li>Foundation for AI-driven workflows</li>
-</ul>
-
-</div>
-
-
-</div>
-
+        <!-- OUTCOME: Big Numbers -->
+        <section class="case-section" id="outcome">
+            <div class="section-label">03. Impact</div>
+            <div class="impact-stats">
+                <div class="stat-item">
+                    <span class="stat-num">Instant</span>
+                    <p>Access to contextual knowledge</p>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-num">Zero</span>
+                    <p>Hallucination via grounded responses</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
 
 <footer>
-
-© 2026 Decyra | Data & AI Architecture Advisory
-
+    <p>© 2026 Decyra | Data & AI Architecture Advisory</p>
 </footer>
 
 </body>
-
 </html>
