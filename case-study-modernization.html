@@ -1,181 +1,133 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-<title>Data Platform Modernization | Decyra</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Platform Modernization | Decyra Advisory</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
 <header>
-<div class="logo">
-  <a href="index.html">
-    <img src="images/Decyra_logo.png" style="height:50px;">
-  </a>
-</div>
-
-<nav>
-<a href="index.html">Home</a>
-<a href="services.html">Services</a>
-<a href="architectures.html">Architectures</a>
-<a href="use-cases.html">Use Cases</a>
-<a href="case-studies.html">Case Studies</a>
-<a href="about.html">About</a>
-<a href="insights.html">Insights</a>
-<a href="contact.html">Contact</a>
-</nav>
+    <div class="header-container">
+        <a href="index.html" class="logo">
+            <img src="images/Decyra_logo.png" alt="Decyra Logo" style="height:45px;">
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="architectures.html">Architectures</a>
+            <a href="use-cases.html">Use Cases</a>
+            <a href="case-studies.html" class="active">Case Studies</a>
+            <a href="contact.html" class="cta-link">Request Consultation</a>
+        </nav>
+    </div>
 </header>
 
+<main>
+    <!-- HERO: Strategic Vision -->
+    <section class="hero-impact">
+        <div class="container">
+            <span class="label" style="color: var(--accent); margin-bottom: 20px; display: block;">Infrastructure Transformation</span>
+            <h1>Enterprise Data Modernization: <br>The AI-Ready Lakehouse</h1>
+            <p class="subtitle">
+                Transitioning legacy technical debt into a high-performance, unified data fabric built for the next era of intelligence.
+            </p>
+        </div>
+    </section>
 
-<!-- HERO -->
+    <!-- EXECUTIVE SUMMARY BAR -->
+    <section class="summary-bar">
+        <div class="grid-3">
+            <div class="summary-item">
+                <small>Platform</small>
+                <p>Snowflake & Microsoft Fabric</p>
+            </div>
+            <div class="summary-item">
+                <small>Strategy</small>
+                <p>Medallion Architecture (Bronze/Silver/Gold)</p>
+            </div>
+            <div class="summary-item">
+                <small>Efficiency</small>
+                <p>40% OpEx Reduction</p>
+            </div>
+        </div>
+    </section>
 
-<section class="case-hero">
+    <div class="content-wrapper">
+        
+        <!-- SECTION 01: THE CHALLENGE -->
+        <section class="case-block">
+            <div class="label">01. The Challenge</div>
+            <div class="content">
+                <h2>The Rigidity of Legacy Systems</h2>
+                <p>The client was hindered by a legacy data warehouse that failed to scale with exponential data growth. Performance bottlenecks and rigid schema requirements created an <strong>"insights gap,"</strong> where business decision-makers were operating on stale information.</p>
+                <p>High maintenance costs and a lack of support for unstructured data formats made the platform a liability for emerging AI initiatives.</p>
+            </div>
+        </section>
 
-<h1>Enterprise Data Platform Modernization</h1>
+        <!-- SECTION 02: THE ARCHITECTURE -->
+        <section class="case-block" style="background: var(--bg-surface);">
+            <div class="label">02. The Architecture</div>
+            <div class="content">
+                <h2>Unified Data Fabric</h2>
+                <p>We engineered a modern Lakehouse architecture that decouples storage from compute, enabling seamless scaling and cross-platform governance.</p>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Multi-Engine Interop</h3>
+                        <p>Leveraging Snowflake for high-concurrency BI and Microsoft Fabric (OneLake) for unified, engine-agnostic data access.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Medallion Design</h3>
+                        <p>Implemented a tiered data quality framework (Bronze/Silver/Gold) to ensure data lineage and trust at every stage.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>AI-Native ELT</h3>
+                        <p>Optimized pipelines designed to feed both traditional reporting and vector-based AI workloads simultaneously.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<p style="font-size:18px;">
-Transforming legacy data warehouse into a scalable, AI-ready lakehouse platform
-</p>
+        <!-- SECTION 03: OUTCOME -->
+        <section class="case-block">
+            <div class="label">03. Impact</div>
+            <div class="content">
+                <h2>Performance at Scale</h2>
+                <div class="results-grid">
+                    <div class="result-box">
+                        <span class="value">3x</span>
+                        <p>Improvement in query performance.</p>
+                    </div>
+                    <div class="result-box">
+                        <span class="value">40%</span>
+                        <p>Reduction in total cost of ownership (TCO).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-</section>
+        <!-- SECTION 04: STRATEGIC INSIGHT -->
+        <section class="case-block" style="border-top: 1px solid var(--border);">
+            <div class="label" style="color: var(--accent);">Advisory Insight</div>
+            <div class="content">
+                <p class="subtitle" style="font-style: italic; color: var(--text-main);">
+                    "True modernization is not a lift-and-shift. It is the tactical decision to treat data as a <strong>product</strong>, ensuring the architecture is engine-agnostic and ready for the demands of Generative AI."
+                </p>
+            </div>
+        </section>
 
-
-<div class="case-container">
-
-
-<!-- CONTEXT -->
-
-<div class="case-section">
-
-<p><strong>Context:</strong> Enterprise Analytics & Reporting Platform</p>
-
-<p>
-This initiative focused on modernizing a legacy data warehouse
-to support growing analytics workloads, scalability demands and
-emerging AI use cases.
-</p>
-
-</div>
-
-
-<!-- PROBLEM -->
-
-<div class="case-section">
-
-<h3>The Problem</h3>
-
-<p>
-The existing data warehouse was not able to scale with increasing
-data volumes and reporting requirements. Performance bottlenecks,
-high infrastructure costs and rigid data models limited the ability
-to deliver timely insights.
-</p>
-
-<p>
-The platform also lacked support for modern analytics patterns and
-AI-driven workloads, creating a gap between data availability and
-business decision-making.
-</p>
-
-</div>
-
-
-<!-- APPROACH -->
-
-<div class="case-section">
-
-<h3>The Approach</h3>
-
-<p>
-Designed and implemented a modern lakehouse architecture leveraging
-Snowflake and Microsoft Fabric to enable scalable data processing,
-unified access and governance.
-</p>
-
-<ul>
-<li>Defined migration strategy from legacy warehouse to cloud-native platform</li>
-<li>Implemented scalable data ingestion and transformation pipelines</li>
-<li>Designed unified data access layer for analytics and reporting</li>
-<li>Enabled integration with AI and advanced analytics workloads</li>
-</ul>
-
-</div>
-
-
-<!-- ARCHITECTURE -->
-
-<div class="case-section">
-
-<h3>Architecture Highlights</h3>
-
-<ul>
-<li>Snowflake for scalable data warehousing and compute separation</li>
-<li>Microsoft Fabric (OneLake) for unified data access and analytics</li>
-<li>Lakehouse architecture supporting structured and semi-structured data</li>
-<li>Optimized ELT pipelines for performance and cost efficiency</li>
-<li>Integrated governance and security controls</li>
-</ul>
-
-</div>
-
-
-<!-- CONSIDERATIONS -->
-
-<div class="case-section">
-
-<h3>Architecture Considerations</h3>
-
-<ul>
-<li>Balancing cost optimization with performance requirements</li>
-<li>Ensuring data consistency during migration</li>
-<li>Designing for multi-workload support (BI + AI)</li>
-<li>Establishing governance across distributed data environments</li>
-</ul>
-
-</div>
-
-
-<!-- OUTCOME -->
-
-<div class="case-section">
-
-<h3>Outcome</h3>
-
-<ul>
-<li>40% reduction in infrastructure and operational costs</li>
-<li>3x improvement in query performance for analytics workloads</li>
-<li>Improved scalability for growing data volumes</li>
-<li>Enabled foundation for AI and advanced analytics use cases</li>
-</ul>
-
-</div>
-
-
-<!-- KEY INSIGHT -->
-
-<div class="case-section" style="border-left:4px solid #14b8a6;">
-
-<h3>Key Insight</h3>
-
-<p>
-Modernization is not just about migrating to the cloud. The real value
-comes from redesigning the architecture to support multiple workloads,
-including analytics and AI, on a unified data foundation.
-</p>
-
-</div>
-
-
-</div>
-
+    </div>
+</main>
 
 <footer>
-
-© 2026 Decyra | Data & AI Architecture Advisory
-
+    <div class="footer-container">
+        <p>© 2026 Decyra | Data & AI Architecture Advisory</p>
+        <a href="contact.html">Architect your transformation →</a>
+    </div>
 </footer>
 
 </body>
-
 </html>
