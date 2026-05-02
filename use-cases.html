@@ -11,7 +11,7 @@
 <header>
 <div class="logo">
   <a href="index.html">
-    <img src="images/Decyra_logo.png" alt="Decyra Logo" style="height:50px; vertical-align: middle;">
+    <img src="images/Decyra_logo.png" alt="Decyra Logo" style="height:50px;">
   </a>
 </div>
 
@@ -19,7 +19,7 @@
 <a href="index.html">Home</a>
 <a href="services.html">Services</a>
 <a href="architectures.html">Architectures</a>
-<a href="use-cases.html" style="color:#14b8a6;">Use Cases</a>
+<a href="use-cases.html" class="active">Use Cases</a>
 <a href="case-studies.html">Case Studies</a>
 <a href="about.html">About</a>
 <a href="insights.html">Insights</a>
@@ -28,44 +28,67 @@
 </header>
 
 
-<!-- INTRO -->
+<!-- HERO -->
 
-<section class="section">
+<section class="hero-impact">
 
-<h2>AI & Data Use Cases</h2>
+<div class="container">
 
-<p style="max-width:800px;">
-These are real-world problems where data platforms and AI systems
-can create measurable impact. Each use case reflects how architecture,
-data and AI come together to improve decision-making and outcomes.
-</p>
+<span class="label" style="color: var(--accent); margin-bottom:20px; display:block;">
+AI-Native Problem Solving
+</span>
 
-</section>
+<h1>
+AI & Data Use Cases<br>
+<span class="highlight">built around real problems</span>
+</h1>
 
-
-<!-- PHILOSOPHY STRIP -->
-
-<section class="section" style="background:#0f172a; color:#94a3b8; text-align:center;">
-
-<p style="font-size:18px; max-width:800px; margin:auto;">
+<p class="subtitle">
 Most teams start with tools.  
-We start with the problem—and design systems that solve it.
+We start with the problem—and design systems that improve decisions,
+scale operations and deliver measurable outcomes.
 </p>
+
+</div>
 
 </section>
 
 
-<!-- USE CASE GRID -->
+<!-- IMPACT STRIP -->
 
-<section class="section">
+<section class="summary-bar">
 
-<div class="card-grid">
+<div class="grid-3">
+
+<div class="summary-item">
+<small>Focus</small>
+<p>Decision Systems</p>
+</div>
+
+<div class="summary-item">
+<small>Approach</small>
+<p>Data + AI Architecture</p>
+</div>
+
+<div class="summary-item">
+<small>Outcome</small>
+<p>Speed, Scale & Cost Efficiency</p>
+</div>
+
+</div>
+
+</section>
 
 
-<!-- USE CASE 1 -->
+<!-- USE CASES -->
 
-<div class="card">
-<h3>Credit Risk Decision Systems</h3>
+<section class="case-block">
+
+<div class="label">01</div>
+
+<div class="content">
+
+<h2>Credit Risk Decision Systems</h2>
 
 <p>
 Manual underwriting processes are slow, inconsistent and difficult to scale.
@@ -76,17 +99,22 @@ AI-assisted decision systems combine financial data, documents and
 LLM-based analysis to accelerate risk evaluation with human oversight.
 </p>
 
-<p style="color:#94a3b8;">
+<p style="color: var(--text-muted);">
 Outcome: Faster decisions, improved consistency, scalable underwriting.
 </p>
 
 </div>
 
+</section>
 
-<!-- USE CASE 2 -->
 
-<div class="card">
-<h3>Fraud Detection Platforms</h3>
+<section class="case-block" style="background: var(--bg-surface);">
+
+<div class="label">02</div>
+
+<div class="content">
+
+<h2>Fraud Detection Platforms</h2>
 
 <p>
 Traditional rule-based systems struggle to detect evolving fraud patterns
@@ -98,17 +126,22 @@ Modern architectures combine streaming data, anomaly detection and
 AI models to identify suspicious activity proactively.
 </p>
 
-<p style="color:#94a3b8;">
+<p style="color: var(--text-muted);">
 Outcome: Reduced fraud losses, real-time detection, improved accuracy.
 </p>
 
 </div>
 
+</section>
 
-<!-- USE CASE 3 -->
 
-<div class="card">
-<h3>AI Knowledge Assistants</h3>
+<section class="case-block">
+
+<div class="label">03</div>
+
+<div class="content">
+
+<h2>AI Knowledge Assistants</h2>
 
 <p>
 Enterprise knowledge is fragmented across systems, making it difficult
@@ -120,17 +153,22 @@ RAG-based systems with LLMs enable contextual search, summarization
 and decision support across structured and unstructured data.
 </p>
 
-<p style="color:#94a3b8;">
+<p style="color: var(--text-muted);">
 Outcome: Faster insights, reduced dependency on manual search.
 </p>
 
 </div>
 
+</section>
 
-<!-- USE CASE 4 -->
 
-<div class="card">
-<h3>Data Platform Modernization</h3>
+<section class="case-block" style="background: var(--bg-surface);">
+
+<div class="label">04</div>
+
+<div class="content">
+
+<h2>Data Platform Modernization</h2>
 
 <p>
 Legacy data warehouses lack scalability, flexibility and support
@@ -142,12 +180,9 @@ Lakehouse architectures on Snowflake, Fabric and cloud platforms
 enable scalable, cost-efficient and AI-ready data ecosystems.
 </p>
 
-<p style="color:#94a3b8;">
+<p style="color: var(--text-muted);">
 Outcome: Improved performance, reduced cost, AI readiness.
 </p>
-
-</div>
-
 
 </div>
 
@@ -156,17 +191,23 @@ Outcome: Improved performance, reduced cost, AI readiness.
 
 <!-- CTA -->
 
-<section class="section">
+<section class="case-block" style="border-top: 1px solid var(--border);">
+
+<div class="label" style="color: var(--accent);">Next Step</div>
+
+<div class="content">
 
 <h2>Have a Similar Challenge?</h2>
 
 <p>
-If you are working on a similar problem or exploring how AI and data
-can improve your systems, Decyra can help define the right approach,
-validate it, and design a scalable solution.
+If you are exploring how AI and data can improve your systems,
+the starting point is not tools—it is clarity on the problem,
+the architecture and the outcomes that matter.
 </p>
 
 <a class="button" href="contact.html">Start a Conversation</a>
+
+</div>
 
 </section>
 
