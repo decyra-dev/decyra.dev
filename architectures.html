@@ -11,14 +11,14 @@
 <header>
 <div class="logo">
   <a href="index.html">
-    <img src="images/Decyra_logo.png" alt="Decyra Logo" style="height:50px; vertical-align: middle;">
+    <img src="images/Decyra_logo.png" alt="Decyra Logo" style="height:50px;">
   </a>
 </div>
 
 <nav>
 <a href="index.html">Home</a>
 <a href="services.html">Services</a>
-<a href="architectures.html">Architectures</a>
+<a href="architectures.html" class="active">Architectures</a>
 <a href="use-cases.html">Use Cases</a>
 <a href="case-studies.html">Case Studies</a>
 <a href="about.html">About</a>
@@ -28,37 +28,79 @@
 </header>
 
 
-<section class="section">
+<!-- HERO -->
 
-<h2>Architecture Patterns for Data & AI Systems</h2>
+<section class="hero-impact">
 
-<p style="max-width:800px;">
-These are not generic reference diagrams. They represent proven architecture patterns
-used to solve real business problems—designed to support scalable data platforms,
-AI workloads and decision systems.
+<div class="container">
+
+<span class="label" style="color: var(--accent); margin-bottom:20px; display:block;">
+Architecture Thinking
+</span>
+
+<h1>
+Architecture patterns<br>
+that scale decisions
+</h1>
+
+<p class="subtitle">
+These are not static diagrams.  
+They are system designs that connect data, AI and workflows
+to improve decisions and business outcomes.
 </p>
 
-<p style="max-width:800px;">
-Each pattern can be adapted based on your context, scale and business goals.
-</p>
+</div>
 
 </section>
 
 
-<section class="section" style="background:#0f172a; color:#94a3b8;">
+<!-- IMPACT STRIP -->
 
-<p style="font-size:18px; max-width:800px; margin:auto; text-align:center;">
+<section class="summary-bar">
+
+<div class="grid-3">
+
+<div class="summary-item">
+<small>Focus</small>
+<p>Decision Systems</p>
+</div>
+
+<div class="summary-item">
+<small>Design</small>
+<p>Scalable & Governed</p>
+</div>
+
+<div class="summary-item">
+<small>Outcome</small>
+<p>Speed, Cost, Intelligence</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PHILOSOPHY -->
+
+<section class="section" style="background:#020617; text-align:center;">
+
+<p style="font-size:20px; max-width:800px; margin:auto;">
 Most architecture diagrams show components.  
-We focus on how those components enable better decisions, faster execution,
-and real business outcomes.
+We focus on how those components enable better decisions,
+faster execution, and measurable outcomes.
 </p>
 
 </section>
 
+
+<!-- ARCHITECTURE GRID -->
 
 <section class="section">
 
 <div class="card-grid">
+
+
+<!-- CARD 1 -->
 
 <div class="card">
 
@@ -67,13 +109,19 @@ and real business outcomes.
 <img src="images/data-platform-architecture.png" style="width:100%;border-radius:4px;">
 
 <p>
-A scalable data platform architecture designed for reliable ingestion,
-transformation and analytics—forming the foundation for reporting,
-insights and downstream AI use cases.
+Foundation for ingestion, transformation and analytics.
+Designed to ensure reliable data flow and support reporting
+and downstream AI systems.
+</p>
+
+<p style="color: var(--text-muted);">
+Outcome: Reliable data, scalable analytics, faster insights
 </p>
 
 </div>
 
+
+<!-- CARD 2 -->
 
 <div class="card">
 
@@ -82,13 +130,18 @@ insights and downstream AI use cases.
 <img src="images/ai-data-platform.png" style="width:100%;border-radius:4px;">
 
 <p>
-An evolution of traditional platforms to support AI workloads,
-unstructured data, and decision-oriented systems using modern
-cloud-native architecture patterns.
+Extends traditional platforms to support unstructured data,
+LLMs, and decision-oriented workflows using modern architectures.
+</p>
+
+<p style="color: var(--text-muted);">
+Outcome: AI-ready systems, faster experimentation, smarter decisions
 </p>
 
 </div>
 
+
+<!-- CARD 3 -->
 
 <div class="card">
 
@@ -97,44 +150,76 @@ cloud-native architecture patterns.
 <img src="images/databricks-lakehouse.png" style="width:100%;border-radius:4px;">
 
 <p>
-Unified data architecture enabling data engineering, analytics
-and machine learning on a single platform for faster iteration
-and reduced complexity.
+Unified architecture for data engineering, analytics and
+machine learning on a single platform.
+</p>
+
+<p style="color: var(--text-muted);">
+Outcome: Reduced complexity, faster iteration, lower cost
 </p>
 
 </div>
 
 
+<!-- CARD 4 -->
+
 <div class="card">
 
-<h3>Cloud Data Warehouse Architecture</h3>
+<h3>Cloud Data Warehouse</h3>
 
 <img src="images/snowflake-analytics.png" style="width:100%;border-radius:4px;">
 
 <p>
-Scalable analytics architecture designed for high-performance
-querying, data sharing and enterprise reporting workloads.
+High-performance analytics architecture designed for
+scalable querying, reporting and data sharing.
+</p>
+
+<p style="color: var(--text-muted);">
+Outcome: High concurrency, enterprise reporting, data collaboration
 </p>
 
 </div>
+
 
 </div>
 
 </section>
 
 
+<!-- SYSTEM THINKING -->
+
+<section class="section" style="background:#020617; text-align:center;">
+
+<h2>How These Systems Work Together</h2>
+
+<p style="font-size:22px; margin-top:10px;">
+Sense → Decide → Act → Learn
+</p>
+
+<p style="max-width:700px; margin:auto; color: var(--text-muted);">
+Architecture is not just data movement.  
+It is about enabling systems that continuously improve decisions
+through feedback, intelligence and execution.
+</p>
+
+</section>
+
+
+<!-- CTA -->
+
 <section class="section">
 
 <h2>From Patterns to Real Systems</h2>
 
-<p>
-These patterns are starting points—not final solutions. Every organization
-has unique constraints, data landscapes and business goals.
+<p style="max-width:800px;">
+These patterns are starting points—not final solutions.  
+Every organization has unique constraints, scale requirements,
+and decision workflows.
 </p>
 
-<p>
-Decyra works with you to adapt these patterns into architectures that
-align with your decision workflows, scale requirements and long-term strategy.
+<p style="max-width:800px;">
+Decyra helps translate these patterns into production-grade
+architectures aligned to your business outcomes.
 </p>
 
 <a class="button" href="contact.html">Discuss Your Architecture</a>
