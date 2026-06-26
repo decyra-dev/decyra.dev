@@ -1,69 +1,456 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Case Studies | Decyra</title>
-<link rel="stylesheet" href="style.css">
-</head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --obsidian:#0A0A0F;
+  --obsidian2:#0F0F1A;
+  --violet:#7C3AED;
+  --violet-light:#9D5CF6;
+  --violet-glow:rgba(124,58,237,0.3);
+  --ice:#38BDF8;
+  --green:#4ADE80;
+  --gold:#F59E0B;
+  --white:#F8F8FF;
+  --muted:#9CA3AF;
+  --card-bg:rgba(255,255,255,0.03);
+  --card-border:rgba(255,255,255,0.07);
+  --glass:rgba(124,58,237,0.08);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--obsidian);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--obsidian);}
+::-webkit-scrollbar-thumb{background:var(--violet);border-radius:2px;}
 
+/* HEADER */
+.header{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:72px;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--card-border);}
+.logo img{height:36px;object-fit:contain;}
+.logo-text{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--white),var(--violet-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+nav{display:flex;gap:2rem;align-items:center;}
+nav a{color:var(--muted);text-decoration:none;font-size:0.875rem;font-weight:500;letter-spacing:0.02em;transition:color 0.2s;}
+nav a:hover{color:var(--white);}
+nav a.active{color:var(--white);background:var(--violet);padding:0.5rem 1.2rem;border-radius:6px;}
+
+/* HERO */
+.hero{padding:160px 5% 90px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(124,58,237,0.15),transparent 60%);pointer-events:none;}
+.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1;}
+.eyebrow{font-size:0.75rem;font-weight:600;letter-spacing:0.2em;color:var(--ice);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.5rem;}
+.eyebrow::before{content:'';width:32px;height:1px;background:var(--ice);}
+.hero h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:1.5rem;max-width:700px;}
+.hero h1 span{background:linear-gradient(135deg,var(--violet-light),var(--ice));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{font-size:1.05rem;color:var(--muted);line-height:1.85;max-width:600px;}
+
+/* STATS */
+.stats-bar{padding:3.5rem 5%;background:var(--obsidian2);border-top:1px solid var(--card-border);border-bottom:1px solid var(--card-border);}
+.stats-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center;}
+.stat-val{font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,var(--violet-light),var(--ice));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.stat-lbl{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.4rem;}
+
+/* FILTER BAR */
+.filter-bar{padding:2rem 5%;border-bottom:1px solid var(--card-border);}
+.filter-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;}
+.filter-label{font-size:0.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-right:0.5rem;}
+.filter-btn{background:var(--card-bg);border:1px solid var(--card-border);border-radius:100px;padding:0.45rem 1.1rem;font-size:0.78rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;}
+.filter-btn:hover,.filter-btn.active{background:rgba(124,58,237,0.12);border-color:var(--violet);color:var(--white);}
+
+/* FEATURED CASE STUDY */
+.featured{padding:5rem 5%;background:var(--obsidian);}
+.featured-inner{max-width:1200px;margin:0 auto;}
+.section-tag{font-size:0.72rem;font-weight:700;letter-spacing:0.2em;color:var(--violet-light);text-transform:uppercase;margin-bottom:2rem;}
+.featured-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:20px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;transition:all 0.3s;}
+.featured-card:hover{border-color:var(--violet);box-shadow:0 24px 60px rgba(0,0,0,0.5);}
+.featured-visual{background:linear-gradient(135deg,rgba(124,58,237,0.2),rgba(56,189,248,0.08));border-right:1px solid var(--card-border);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem;gap:2rem;min-height:380px;}
+.feat-icon{font-size:4rem;}
+.feat-metrics{display:grid;grid-template-columns:1fr 1fr;gap:1rem;width:100%;}
+.feat-metric{background:rgba(0,0,0,0.3);border:1px solid var(--card-border);border-radius:10px;padding:1rem;text-align:center;}
+.feat-metric .m-val{font-size:1.6rem;font-weight:900;background:linear-gradient(135deg,var(--violet-light),var(--ice));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.feat-metric .m-lbl{font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.25rem;}
+.featured-body{padding:3rem;}
+.industry-badge{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.25);border-radius:100px;padding:0.3rem 0.85rem;font-size:0.7rem;font-weight:700;color:var(--violet-light);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:1.25rem;}
+.featured-body h2{font-size:clamp(1.4rem,2.5vw,2rem);font-weight:900;letter-spacing:-1px;margin-bottom:0.75rem;line-height:1.2;}
+.featured-body .challenge{font-size:0.9rem;color:var(--muted);line-height:1.8;margin-bottom:1.5rem;}
+.outcome-pills{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2rem;}
+.outcome-pill{background:rgba(74,222,128,0.07);border:1px solid rgba(74,222,128,0.15);border-radius:8px;padding:0.4rem 0.85rem;font-size:0.75rem;font-weight:600;color:var(--green);}
+.tech-stack{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:2rem;}
+.tech-chip{background:var(--card-bg);border:1px solid var(--card-border);border-radius:6px;padding:0.25rem 0.65rem;font-size:0.68rem;font-weight:600;color:var(--muted);}
+.read-link{display:inline-flex;align-items:center;gap:0.5rem;color:var(--violet-light);text-decoration:none;font-size:0.875rem;font-weight:700;transition:all 0.2s;}
+.read-link:hover{color:var(--ice);gap:0.75rem;}
+
+/* CASE STUDY GRID */
+.cs-grid-section{padding:5rem 5%;}
+.cs-grid-section:nth-child(even){background:var(--obsidian2);}
+.cs-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem;}
+.cs-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:20px;overflow:hidden;transition:all 0.3s;display:flex;flex-direction:column;}
+.cs-card:hover{border-color:var(--violet);transform:translateY(-5px);box-shadow:0 24px 48px rgba(0,0,0,0.4);}
+.cs-card-top{padding:2rem 2rem 0;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;}
+.cs-icon-wrap{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;}
+.cs-card-body{padding:1.25rem 2rem 2rem;flex:1;display:flex;flex-direction:column;}
+.cs-industry{font-size:0.65rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.5rem;}
+.cs-card h3{font-size:1.05rem;font-weight:800;line-height:1.3;margin-bottom:0.75rem;}
+.cs-card p{font-size:0.85rem;color:var(--muted);line-height:1.75;margin-bottom:1.25rem;flex:1;}
+.cs-results{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem;}
+.cs-result{display:flex;align-items:center;gap:0.6rem;font-size:0.78rem;color:var(--muted);}
+.cs-result::before{content:'✓';color:var(--green);font-weight:700;font-size:0.8rem;}
+.cs-footer{display:flex;align-items:center;justify-content:space-between;padding-top:1.25rem;border-top:1px solid var(--card-border);}
+.cs-tags{display:flex;gap:0.4rem;flex-wrap:wrap;}
+.cs-tag{font-size:0.62rem;font-weight:600;color:var(--muted);background:var(--card-bg);border:1px solid var(--card-border);border-radius:4px;padding:0.2rem 0.5rem;}
+.cs-arrow{color:var(--muted);font-size:1.1rem;transition:all 0.2s;text-decoration:none;}
+.cs-card:hover .cs-arrow{color:var(--violet-light);transform:translateX(3px);}
+
+/* PHILOSOPHY STRIP */
+.philosophy{padding:5rem 5%;text-align:center;position:relative;overflow:hidden;border-top:1px solid var(--card-border);}
+.philosophy::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(124,58,237,0.1),transparent 70%);}
+.philosophy-inner{max-width:720px;margin:0 auto;position:relative;z-index:1;}
+.philosophy h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;letter-spacing:-1px;margin-bottom:1rem;}
+.philosophy p{color:var(--muted);font-size:1rem;line-height:1.85;}
+.philosophy p strong{color:var(--white);}
+
+/* CTA */
+.cta{padding:8rem 5%;text-align:center;position:relative;overflow:hidden;}
+.cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(124,58,237,0.18),transparent 70%);}
+.cta-inner{max-width:650px;margin:0 auto;position:relative;z-index:1;}
+.cta h2{font-size:clamp(2rem,4vw,3rem);font-weight:900;letter-spacing:-1.5px;margin-bottom:1rem;}
+.cta p{color:var(--muted);font-size:1rem;line-height:1.8;margin-bottom:2.5rem;}
+.btn-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:0.5rem;background:var(--violet);color:#fff;padding:0.875rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;transition:all 0.2s;}
+.btn-primary:hover{background:var(--violet-light);box-shadow:0 0 30px var(--violet-glow);}
+.btn-secondary{display:inline-flex;align-items:center;gap:0.5rem;background:transparent;color:var(--white);padding:0.875rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;border:1px solid var(--card-border);transition:all 0.2s;}
+.btn-secondary:hover{border-color:var(--violet);color:var(--violet-light);}
+
+/* FOOTER */
+footer{background:var(--obsidian2);border-top:1px solid var(--card-border);padding:4rem 5% 2rem;}
+.footer-inner{max-width:1200px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
+.footer-brand p{color:var(--muted);font-size:0.875rem;line-height:1.7;margin-top:1rem;max-width:280px;}
+.footer-col h4{font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.25rem;}
+.footer-col a{display:block;color:var(--muted);text-decoration:none;font-size:0.875rem;margin-bottom:0.75rem;transition:color 0.2s;}
+.footer-col a:hover{color:var(--white);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;border-top:1px solid var(--card-border);font-size:0.8rem;color:var(--muted);}
+.footer-logo{font-size:1.3rem;font-weight:900;background:linear-gradient(135deg,var(--white),var(--violet-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(30px);transition:all 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:900px){
+  .featured-card{grid-template-columns:1fr;}
+  .featured-visual{border-right:none;border-bottom:1px solid var(--card-border);min-height:auto;}
+  .stats-inner{grid-template-columns:repeat(2,1fr);}
+  .footer-top{grid-template-columns:1fr;}
+  nav{display:none;}
+}
+</style>
+</head>
 <body>
 
-<header>
-<div class="logo">
-<a href="index.html">
-<img src="images/Decyra_logo.png" style="height:50px;">
-</a>
-</div>
-
-<nav>
-<a href="index.html">Home</a>
-<a href="services.html">Services</a>
-<a href="architectures.html">Architectures</a>
-<a href="use-cases.html">Use Cases</a>
-<a href="case-studies.html">Case Studies</a>
-<a href="about.html">About</a>
-<a href="insights.html">Insights</a>
-<a href="contact.html">Contact</a>
-</nav>
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">
+    <a href="index.html">
+      <img src="images/Decyra_logo.png" alt="Decyra" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="logo-text" style="display:none">DECYRA</span>
+    </a>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="architectures.html">Architectures</a>
+    <a href="use-cases.html">Use Cases</a>
+    <a href="qrynix.html">Qrynix</a>
+    <a href="case-studies.html" class="active">Case Studies</a>
+    <a href="about.html">About</a>
+    <a href="insights.html">Insights</a>
+    <a href="contact.html">Contact</a>
+  </nav>
 </header>
 
-<section class="section">
-
-<h2>Case Studies</h2>
-
-<p style="max-width:800px;">
-Real-world examples of how data platforms, AI systems and architecture
-decisions translate into measurable business outcomes.
-</p>
-
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">REAL-WORLD OUTCOMES</p>
+    <h1>Architecture Decisions<br>That Delivered <span>Measurable Results</span></h1>
+    <p class="hero-sub">Real-world examples of how data platforms, AI systems, and the right architecture decisions translate into speed, cost savings, and business intelligence that actually moves the needle.</p>
+  </div>
 </section>
 
-<section class="section">
-
-<div class="card-grid">
-
-<div class="card">
-<h3>AI-Driven Credit Risk Platform (BFSI)</h3>
-<p>Transforming manual underwriting into AI-assisted decision systems.</p>
-<a href="case-study-credit-risk.html">View Case Study →</a>
-</div>
-
-<div class="card">
-<h3>Snowflake + Fabric Modernization</h3>
-<p>Enterprise data platform modernization with cost and performance optimization.</p>
-<a href="case-study-modernization.html">View Case Study →</a>
-</div>
-
-<div class="card">
-<h3>RAG + Multi-Agent Enterprise Assistant</h3>
-<p>AI-powered enterprise knowledge and decision support system.</p>
-<a href="case-study-ai-assistant.html">View Case Study →</a>
-</div>
-
-</div>
-
+<!-- STATS -->
+<section class="stats-bar reveal">
+  <div class="stats-inner">
+    <div>
+      <div class="stat-val">3+</div>
+      <div class="stat-lbl">Industries Transformed</div>
+    </div>
+    <div>
+      <div class="stat-val">10x</div>
+      <div class="stat-lbl">Avg. Decision Speed Gain</div>
+    </div>
+    <div>
+      <div class="stat-val">60%</div>
+      <div class="stat-lbl">Avg. Cost Reduction</div>
+    </div>
+    <div>
+      <div class="stat-val">100%</div>
+      <div class="stat-lbl">Cloud-Native Delivery</div>
+    </div>
+  </div>
 </section>
 
-<footer>© 2026 Decyra</footer>
+<!-- FILTER -->
+<div class="filter-bar reveal">
+  <div class="filter-inner">
+    <span class="filter-label">Filter by</span>
+    <button class="filter-btn active" onclick="filterCards('all',this)">All</button>
+    <button class="filter-btn" onclick="filterCards('bfsi',this)">BFSI</button>
+    <button class="filter-btn" onclick="filterCards('modernization',this)">Modernization</button>
+    <button class="filter-btn" onclick="filterCards('ai',this)">Agentic AI</button>
+    <button class="filter-btn" onclick="filterCards('snowflake',this)">Snowflake</button>
+    <button class="filter-btn" onclick="filterCards('fabric',this)">Microsoft Fabric</button>
+  </div>
+</div>
 
+<!-- FEATURED -->
+<section class="featured reveal">
+  <div class="featured-inner">
+    <div class="section-tag">⭐ Featured Case Study</div>
+    <a href="case-study-credit-risk.html" style="text-decoration:none;color:inherit;">
+      <div class="featured-card" data-tags="bfsi ai">
+        <div class="featured-visual">
+          <div class="feat-icon">🏦</div>
+          <div class="feat-metrics">
+            <div class="feat-metric">
+              <div class="m-val">85%</div>
+              <div class="m-lbl">Faster Decisions</div>
+            </div>
+            <div class="feat-metric">
+              <div class="m-val">40%</div>
+              <div class="m-lbl">Risk Reduction</div>
+            </div>
+            <div class="feat-metric">
+              <div class="m-val">3x</div>
+              <div class="m-lbl">Throughput</div>
+            </div>
+            <div class="feat-metric">
+              <div class="m-val">60%</div>
+              <div class="m-lbl">Cost Savings</div>
+            </div>
+          </div>
+        </div>
+        <div class="featured-body">
+          <div class="industry-badge">🏦 BFSI · Credit Risk</div>
+          <h2>AI-Driven Credit Risk Platform</h2>
+          <p class="challenge">A leading financial institution was processing credit applications through a largely manual underwriting process — slow, inconsistent, and unable to scale. Decyra redesigned the decision architecture from the ground up, introducing AI-assisted underwriting that blends real-time data signals with explainable ML models.</p>
+          <div class="outcome-pills">
+            <div class="outcome-pill">85% faster loan decisions</div>
+            <div class="outcome-pill">40% reduction in default rate</div>
+            <div class="outcome-pill">3x application throughput</div>
+            <div class="outcome-pill">Fully explainable AI</div>
+          </div>
+          <div class="tech-stack">
+            <div class="tech-chip">Azure OpenAI</div>
+            <div class="tech-chip">Microsoft Fabric</div>
+            <div class="tech-chip">Snowflake</div>
+            <div class="tech-chip">LangGraph</div>
+            <div class="tech-chip">Agentic Workflows</div>
+            <div class="tech-chip">Real-Time Scoring</div>
+          </div>
+          <div class="read-link">Read Full Case Study →</div>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- CASE STUDY GRID -->
+<section class="cs-grid-section reveal">
+  <div class="cs-grid" style="max-width:1200px;margin:0 auto;">
+
+    <!-- Card 1 -->
+    <div class="cs-card" data-tags="modernization snowflake fabric">
+      <div class="cs-card-top">
+        <div class="cs-icon-wrap" style="background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.2);">❄️</div>
+        <div class="industry-badge" style="margin-bottom:0;">Enterprise · Data</div>
+      </div>
+      <div class="cs-card-body">
+        <div class="cs-industry" style="color:var(--ice);">Platform Modernization</div>
+        <h3>Snowflake + Microsoft Fabric Modernization</h3>
+        <p>A multinational enterprise running legacy on-prem warehouses needed a path to cloud-native analytics. Decyra designed a dual-platform strategy — Snowflake for enterprise reporting and Fabric for real-time lakehouse workloads — reducing total cost of ownership while doubling query performance.</p>
+        <div class="cs-results">
+          <div class="cs-result">62% reduction in infrastructure cost</div>
+          <div class="cs-result">2x query performance improvement</div>
+          <div class="cs-result">Zero-downtime migration delivery</div>
+          <div class="cs-result">Unified governance across both platforms</div>
+        </div>
+        <div class="cs-footer">
+          <div class="cs-tags">
+            <div class="cs-tag">Snowflake</div>
+            <div class="cs-tag">Fabric</div>
+            <div class="cs-tag">dbt</div>
+            <div class="cs-tag">FinOps</div>
+          </div>
+          <a href="case-study-modernization.html" class="cs-arrow">→</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="cs-card" data-tags="ai">
+      <div class="cs-card-top">
+        <div class="cs-icon-wrap" style="background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.25);">🤖</div>
+        <div class="industry-badge" style="margin-bottom:0;">Enterprise · AI</div>
+      </div>
+      <div class="cs-card-body">
+        <div class="cs-industry" style="color:var(--violet-light);">Agentic AI</div>
+        <h3>RAG + Multi-Agent Enterprise Knowledge Assistant</h3>
+        <p>A global professional services firm needed to unlock institutional knowledge trapped across thousands of documents, reports, and internal systems. Decyra built a multi-agent RAG platform that surfaces answers, drafts responses, and routes complex queries autonomously.</p>
+        <div class="cs-results">
+          <div class="cs-result">90% reduction in knowledge retrieval time</div>
+          <div class="cs-result">Multi-agent orchestration across 6 systems</div>
+          <div class="cs-result">Enterprise security & access control</div>
+          <div class="cs-result">Deployed on Azure + Snowflake Cortex</div>
+        </div>
+        <div class="cs-footer">
+          <div class="cs-tags">
+            <div class="cs-tag">LangGraph</div>
+            <div class="cs-tag">Azure AI Search</div>
+            <div class="cs-tag">OpenAI</div>
+            <div class="cs-tag">RAG</div>
+          </div>
+          <a href="case-study-ai-assistant.html" class="cs-arrow">→</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 — additional -->
+    <div class="cs-card" data-tags="fabric ai">
+      <div class="cs-card-top">
+        <div class="cs-icon-wrap" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);">⚡</div>
+        <div class="industry-badge" style="margin-bottom:0;">Retail · Analytics</div>
+      </div>
+      <div class="cs-card-body">
+        <div class="cs-industry" style="color:var(--gold);">Real-Time Analytics</div>
+        <h3>Real-Time Inventory Intelligence Platform</h3>
+        <p>A large retail chain was making replenishment decisions on day-old batch data — leading to stockouts, overstock, and margin loss. Decyra designed a real-time analytics engine on Microsoft Fabric that streams POS and supply chain events, triggering AI-driven replenishment alerts in under 30 seconds.</p>
+        <div class="cs-results">
+          <div class="cs-result">30-second stock alert latency (from 24hrs)</div>
+          <div class="cs-result">18% reduction in stockout incidents</div>
+          <div class="cs-result">AI-driven replenishment recommendations</div>
+          <div class="cs-result">Integrated with existing ERP systems</div>
+        </div>
+        <div class="cs-footer">
+          <div class="cs-tags">
+            <div class="cs-tag">Fabric</div>
+            <div class="cs-tag">Event Streams</div>
+            <div class="cs-tag">KQL</div>
+            <div class="cs-tag">Power BI</div>
+          </div>
+          <a href="contact.html" class="cs-arrow">→</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy reveal">
+  <div class="philosophy-inner">
+    <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.2em;color:var(--violet-light);text-transform:uppercase;margin-bottom:0.75rem;">Our Approach</div>
+    <h2>Every case study starts with a problem, not a platform.</h2>
+    <p>The technology is always secondary. <strong>We design around the business decision that needs to be made faster, more accurately, or at greater scale</strong> — then choose the architecture that gets you there with the least risk and the most leverage.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta reveal">
+  <div class="cta-inner">
+    <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.2em;color:var(--violet-light);text-transform:uppercase;margin-bottom:0.75rem;">Start Your Story</div>
+    <h2>Ready to Build Your Case Study?</h2>
+    <p>Every one of these outcomes started with a single architecture conversation. Let's talk about what's possible for your organization — and design a system that delivers results you can measure.</p>
+    <div class="btn-row">
+      <a href="contact.html" class="btn-primary">Start a Conversation ↗</a>
+      <a href="architectures.html" class="btn-secondary">Explore Architectures</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">DECYRA</div>
+        <p>Architecting intelligent enterprises through Agentic AI, Microsoft Fabric, Snowflake, and cloud-native platforms that deliver real outcomes.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="services.html">Opportunity Assessment</a>
+        <a href="services.html">Architecture Blueprint</a>
+        <a href="services.html">Proof of Value</a>
+        <a href="services.html">Platform Scaling</a>
+        <a href="services.html">Fractional Advisory</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="case-studies.html">Case Studies</a>
+        <a href="architectures.html">Architectures</a>
+        <a href="#">Qrynix™</a>
+        <a href="insights.html">Insights</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="contact.html">Contact Us</a>
+        <a href="https://linkedin.com/in/MukundKumarMishra-BigData-Cloud-Consultant" target="_blank">LinkedIn</a>
+        <a href="mailto:thisismukund@gmail.com">Email</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Decyra Technologies. All rights reserved.</span>
+      <span>Enterprise AI • Microsoft Fabric • Snowflake</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Filter
+function filterCards(tag, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.cs-card, .featured-card').forEach(card=>{
+    if(tag==='all'){
+      card.closest('.cs-card, [data-tags]')?.style && (card.style.opacity='1', card.style.pointerEvents='auto', card.style.transform='');
+      card.style.opacity='1';
+      card.style.display='';
+    } else {
+      const tags = card.getAttribute('data-tags')||'';
+      card.style.opacity = tags.includes(tag) ? '1' : '0.2';
+      card.style.pointerEvents = tags.includes(tag) ? 'auto' : 'none';
+    }
+  });
+  const feat = document.querySelector('.featured .featured-card');
+  if(feat && tag!=='all'){
+    const tags = feat.getAttribute('data-tags')||'';
+    feat.closest('section').style.opacity = tags.includes(tag) ? '1' : '0.25';
+  } else if(feat){
+    feat.closest('section').style.opacity = '1';
+  }
+}
+
+// Reveal
+const els = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.08});
+els.forEach(el=>obs.observe(el));
+</script>
 </body>
 </html>
