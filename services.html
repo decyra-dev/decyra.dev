@@ -1,207 +1,441 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Services | Decyra</title>
-<link rel="stylesheet" href="style.css">
-</head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --obsidian:#0A0A0F;
+  --obsidian2:#0F0F1A;
+  --violet:#7C3AED;
+  --violet-light:#9D5CF6;
+  --violet-glow:rgba(124,58,237,0.3);
+  --ice:#38BDF8;
+  --ice-glow:rgba(56,189,248,0.2);
+  --white:#F8F8FF;
+  --muted:#9CA3AF;
+  --card-bg:rgba(255,255,255,0.03);
+  --card-border:rgba(255,255,255,0.07);
+  --glass:rgba(124,58,237,0.08);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--obsidian);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--obsidian);}
+::-webkit-scrollbar-thumb{background:var(--violet);border-radius:2px;}
 
+/* HEADER */
+.header{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:72px;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--card-border);}
+.logo img{height:36px;object-fit:contain;}
+.logo-text{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--white),var(--violet-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+nav{display:flex;gap:2rem;align-items:center;}
+nav a{color:var(--muted);text-decoration:none;font-size:0.875rem;font-weight:500;letter-spacing:0.02em;transition:color 0.2s;}
+nav a:hover{color:var(--white);}
+nav a.active{color:var(--white);background:var(--violet);padding:0.5rem 1.2rem;border-radius:6px;}
+
+/* HERO */
+.hero{padding:160px 5% 100px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:0;right:0;width:60%;height:100%;background:radial-gradient(ellipse at top right,rgba(124,58,237,0.15),transparent 70%);pointer-events:none;}
+.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1;}
+.eyebrow{font-size:0.75rem;font-weight:600;letter-spacing:0.2em;color:var(--ice);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.5rem;}
+.eyebrow::before{content:'';width:32px;height:1px;background:var(--ice);}
+.hero h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:1.5rem;max-width:700px;}
+.hero h1 span{background:linear-gradient(135deg,var(--violet-light),var(--ice));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{font-size:1.1rem;color:var(--muted);line-height:1.8;max-width:580px;margin-bottom:3rem;}
+.hero-pills{display:flex;gap:0.75rem;flex-wrap:wrap;}
+.hero-pill{background:var(--card-bg);border:1px solid var(--card-border);border-radius:100px;padding:0.5rem 1.25rem;font-size:0.8rem;font-weight:600;color:var(--muted);letter-spacing:0.05em;}
+
+/* APPROACH INTRO */
+.approach-intro{padding:5rem 5%;background:var(--obsidian2);border-top:1px solid var(--card-border);border-bottom:1px solid var(--card-border);}
+.approach-intro-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.approach-intro h2{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;letter-spacing:-1.5px;line-height:1.2;margin-bottom:1rem;}
+.approach-intro h2 em{font-style:normal;background:linear-gradient(135deg,var(--violet-light),var(--ice));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.approach-intro p{font-size:0.95rem;color:var(--muted);line-height:1.85;}
+.approach-steps{display:flex;flex-direction:column;gap:1.25rem;}
+.approach-step{display:flex;align-items:center;gap:1.25rem;padding:1.25rem 1.5rem;background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;transition:all 0.3s;cursor:default;}
+.approach-step:hover{border-color:var(--violet);transform:translateX(4px);}
+.step-num{font-size:0.7rem;font-weight:800;letter-spacing:0.1em;color:var(--violet-light);background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);border-radius:6px;padding:0.3rem 0.6rem;flex-shrink:0;}
+.step-text h4{font-size:0.9rem;font-weight:700;margin-bottom:0.2rem;}
+.step-text p{font-size:0.8rem;color:var(--muted);}
+
+/* PHASE SECTIONS */
+.phase{padding:6rem 5%;position:relative;overflow:hidden;}
+.phase:nth-child(odd){background:var(--obsidian);}
+.phase:nth-child(even){background:var(--obsidian2);}
+.phase-inner{max-width:1200px;margin:0 auto;}
+.phase-header{display:flex;align-items:flex-start;gap:2rem;margin-bottom:3.5rem;}
+.phase-number{font-size:4rem;font-weight:900;line-height:1;background:linear-gradient(135deg,rgba(124,58,237,0.3),rgba(56,189,248,0.1));-webkit-background-clip:text;-webkit-text-fill-color:transparent;flex-shrink:0;letter-spacing:-3px;}
+.phase-heading{flex:1;}
+.phase-tag{font-size:0.7rem;font-weight:700;letter-spacing:0.2em;color:var(--violet-light);text-transform:uppercase;margin-bottom:0.5rem;}
+.phase-heading h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;letter-spacing:-1px;margin-bottom:0.75rem;}
+.phase-heading p{font-size:0.95rem;color:var(--muted);line-height:1.8;max-width:600px;}
+.phase-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+.svc-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:2rem;transition:all 0.3s;position:relative;overflow:hidden;}
+.svc-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--violet-glow),transparent);opacity:0;transition:opacity 0.3s;}
+.svc-card:hover{border-color:var(--violet);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.4);}
+.svc-card:hover::before{opacity:1;}
+.svc-card-inner{position:relative;z-index:1;}
+.svc-icon{width:48px;height:48px;border-radius:12px;background:var(--glass);border:1px solid rgba(124,58,237,0.2);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.25rem;}
+.svc-card h3{font-size:1rem;font-weight:700;margin-bottom:0.75rem;}
+.svc-card p{font-size:0.85rem;color:var(--muted);line-height:1.75;}
+.svc-bullets{list-style:none;margin-top:1rem;display:flex;flex-direction:column;gap:0.5rem;}
+.svc-bullets li{font-size:0.78rem;color:var(--muted);display:flex;align-items:center;gap:0.5rem;}
+.svc-bullets li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--violet-light);flex-shrink:0;}
+
+/* CAPABILITIES STRIP */
+.cap-strip{padding:5rem 5%;text-align:center;border-top:1px solid var(--card-border);border-bottom:1px solid var(--card-border);background:var(--obsidian2);}
+.cap-strip-inner{max-width:1200px;margin:0 auto;}
+.cap-strip h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-1px;margin-bottom:1rem;}
+.cap-strip p{color:var(--muted);font-size:0.95rem;max-width:600px;margin:0 auto 2.5rem;}
+.tech-tags{display:flex;justify-content:center;flex-wrap:wrap;gap:0.75rem;}
+.tech-tag{background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:0.6rem 1.2rem;font-size:0.8rem;font-weight:600;color:var(--muted);transition:all 0.2s;}
+.tech-tag:hover{border-color:var(--violet);color:var(--white);}
+
+/* POSITIONING STRIP */
+.strip{padding:5rem 5%;text-align:center;position:relative;overflow:hidden;}
+.strip::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(124,58,237,0.12),transparent 70%);}
+.strip-inner{max-width:700px;margin:0 auto;position:relative;z-index:1;}
+.strip p{font-size:1.2rem;color:var(--muted);line-height:1.8;}
+.strip p strong{color:var(--white);font-weight:700;}
+
+/* CTA */
+.cta{padding:8rem 5%;text-align:center;position:relative;overflow:hidden;}
+.cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(124,58,237,0.18),transparent 70%);}
+.cta-inner{max-width:650px;margin:0 auto;position:relative;z-index:1;}
+.cta h2{font-size:clamp(2rem,4vw,3rem);font-weight:900;letter-spacing:-1.5px;margin-bottom:1rem;}
+.cta p{color:var(--muted);font-size:1rem;line-height:1.8;margin-bottom:2.5rem;}
+.btn-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:0.5rem;background:var(--violet);color:#fff;padding:0.875rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;transition:all 0.2s;}
+.btn-primary:hover{background:var(--violet-light);box-shadow:0 0 30px var(--violet-glow);}
+.btn-secondary{display:inline-flex;align-items:center;gap:0.5rem;background:transparent;color:var(--white);padding:0.875rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;border:1px solid var(--card-border);transition:all 0.2s;}
+.btn-secondary:hover{border-color:var(--violet);color:var(--violet-light);}
+
+/* FOOTER */
+footer{background:var(--obsidian2);border-top:1px solid var(--card-border);padding:4rem 5% 2rem;}
+.footer-inner{max-width:1200px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
+.footer-brand p{color:var(--muted);font-size:0.875rem;line-height:1.7;margin-top:1rem;max-width:280px;}
+.footer-col h4{font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.25rem;}
+.footer-col a{display:block;color:var(--muted);text-decoration:none;font-size:0.875rem;margin-bottom:0.75rem;transition:color 0.2s;}
+.footer-col a:hover{color:var(--white);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;border-top:1px solid var(--card-border);font-size:0.8rem;color:var(--muted);}
+.footer-logo{font-size:1.3rem;font-weight:900;background:linear-gradient(135deg,var(--white),var(--violet-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(30px);transition:all 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:900px){
+  .approach-intro-inner,.footer-top{grid-template-columns:1fr;}
+  .phase-header{flex-direction:column;gap:1rem;}
+  .phase-number{font-size:2.5rem;}
+  nav{display:none;}
+}
+</style>
+</head>
 <body>
 
-<header>
-<div class="logo">
-  <a href="index.html">
-    <img src="images/Decyra_logo.png" alt="Decyra Logo" style="height:50px; vertical-align: middle;">
-  </a>
-</div>
-
-<nav>
-<a href="index.html">Home</a>
-<a href="services.html" class="active">Services</a>
-<a href="architectures.html">Architectures</a>
-<a href="use-cases.html">Use Cases</a>
-<a href="case-studies.html">Case Studies</a>
-<a href="about.html">About</a>
-<a href="insights.html">Insights</a>
-<a href="contact.html">Contact</a>
-</nav>
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">
+    <a href="index.html">
+      <img src="images/Decyra_logo.png" alt="Decyra" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="logo-text" style="display:none">DECYRA</span>
+    </a>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="services.html" class="active">Services</a>
+    <a href="architectures.html">Architectures</a>
+    <a href="use-cases.html">Use Cases</a>
+    <a href="case-studies.html">Case Studies</a>
+    <a href="about.html">About</a>
+    <a href="insights.html">Insights</a>
+    <a href="contact.html">Contact</a>
+  </nav>
 </header>
 
-
 <!-- HERO -->
-
-<section class="hero-impact">
-
-<h1>How Decyra Works</h1>
-
-<p class="subtitle">
-Most teams focus on tools and implementation.  
-We focus on identifying the right problems, validating what works,
-and designing systems that scale.
-</p>
-
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">HOW DECYRA WORKS</p>
+    <h1>Not Services.<br><span>A System for Building</span><br>What Actually Works.</h1>
+    <p class="hero-sub">Most teams focus on tools and implementation. We focus on identifying the right problems, validating what works, and designing systems that scale — and continue to deliver value long after launch.</p>
+    <div class="hero-pills">
+      <div class="hero-pill">🎯 Problem-First</div>
+      <div class="hero-pill">✅ Validate Before Scale</div>
+      <div class="hero-pill">🚀 Production-Ready</div>
+      <div class="hero-pill">🏗️ Architecture-Led</div>
+    </div>
+  </div>
 </section>
 
-
-<!-- INTRO -->
-
-<section class="section">
-
-<p style="max-width:800px;">
-Decyra follows a structured approach to help organizations move from
-ideas to production-ready AI and data systems. This is not a set of
-services—it is a way of building systems that deliver measurable outcomes.
-</p>
-
+<!-- APPROACH INTRO -->
+<section class="approach-intro reveal">
+  <div class="approach-intro-inner">
+    <div>
+      <h2>A structured approach to<br><em>measurable outcomes</em></h2>
+      <p style="margin-top:1rem;">Decyra follows a structured three-phase approach to help organizations move from ideas to production-ready AI and data systems. This is not a menu of services — it is a proven way of building systems that deliver measurable business outcomes at every stage.</p>
+    </div>
+    <div class="approach-steps">
+      <div class="approach-step">
+        <div class="step-num">01</div>
+        <div class="step-text">
+          <h4>Identify the Right Problems</h4>
+          <p>Find where AI and data create genuine business impact</p>
+        </div>
+      </div>
+      <div class="approach-step">
+        <div class="step-num">02</div>
+        <div class="step-text">
+          <h4>Validate Before You Scale</h4>
+          <p>Prove value technically and commercially before full investment</p>
+        </div>
+      </div>
+      <div class="approach-step">
+        <div class="step-num">03</div>
+        <div class="step-text">
+          <h4>Scale What Works</h4>
+          <p>Build production-ready, governed, cost-efficient platforms</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-
-<!-- IDENTIFY -->
-
-<section class="section" style="background: var(--bg-surface);">
-
-<h2>01 — Identify the Right Problems</h2>
-
-<p style="max-width:800px;">
-Most failures in AI and data initiatives happen because teams start
-with technology instead of the problem. The first step is identifying
-where AI and data can create meaningful impact.
-</p>
-
-<div class="card-grid">
-
-<div class="card">
-<h3>Architecture & AI Opportunity Assessment</h3>
-<p>
-Evaluate your current data and cloud landscape to identify
-high-impact opportunities aligned to business outcomes.
-</p>
-</div>
-
-<div class="card">
-<h3>Decision System Design</h3>
-<p>
-Define how data, AI models and human workflows come together
-to support better and faster decisions.
-</p>
-</div>
-
-</div>
-
+<!-- PHASE 01 -->
+<section class="phase reveal">
+  <div class="phase-inner">
+    <div class="phase-header">
+      <div class="phase-number">01</div>
+      <div class="phase-heading">
+        <div class="phase-tag">Phase One</div>
+        <h2>Identify the Right Problems</h2>
+        <p>Most failures in AI and data initiatives happen because teams start with technology instead of the problem. The first step is identifying where AI and data can create meaningful, measurable impact for your business.</p>
+      </div>
+    </div>
+    <div class="phase-grid">
+      <div class="svc-card">
+        <div class="svc-card-inner">
+          <div class="svc-icon">🔍</div>
+          <h3>Architecture & AI Opportunity Assessment</h3>
+          <p>Evaluate your current data and cloud landscape to surface high-impact opportunities aligned directly to business outcomes — not just technical improvements.</p>
+          <ul class="svc-bullets">
+            <li>Current state architecture review</li>
+            <li>AI readiness evaluation</li>
+            <li>Prioritized opportunity map</li>
+            <li>Quick-win identification</li>
+          </ul>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-card-inner">
+          <div class="svc-icon">⚙️</div>
+          <h3>Decision System Design</h3>
+          <p>Define how data, AI models, and human workflows come together to support faster and better decisions — across every level of the organization.</p>
+          <ul class="svc-bullets">
+            <li>Decision flow mapping</li>
+            <li>Human-in-the-loop design</li>
+            <li>AI model integration patterns</li>
+            <li>Governance frameworks</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-
-<!-- VALIDATE -->
-
-<section class="section">
-
-<h2>02 — Validate Before You Scale</h2>
-
-<p style="max-width:800px;">
-Before investing in full-scale implementation, it is critical to
-validate that the solution works—technically and from a business
-impact perspective.
-</p>
-
-<div class="card-grid">
-
-<div class="card">
-<h3>Proof of Value (PoV)</h3>
-<p>
-Validate key use cases through focused initiatives that demonstrate
-real business impact—not just technical feasibility.
-</p>
-</div>
-
-<div class="card">
-<h3>AI & Data Architecture Blueprint</h3>
-<p>
-Design scalable, secure architectures that support validated use
-cases and future growth.
-</p>
-</div>
-
-</div>
-
+<!-- PHASE 02 -->
+<section class="phase reveal">
+  <div class="phase-inner">
+    <div class="phase-header">
+      <div class="phase-number">02</div>
+      <div class="phase-heading">
+        <div class="phase-tag">Phase Two</div>
+        <h2>Validate Before You Scale</h2>
+        <p>Before committing to full-scale implementation, validate that the solution works — both technically and from a business impact perspective. This phase eliminates risk and builds internal confidence.</p>
+      </div>
+    </div>
+    <div class="phase-grid">
+      <div class="svc-card">
+        <div class="svc-card-inner">
+          <div class="svc-icon">✅</div>
+          <h3>Proof of Value (PoV)</h3>
+          <p>Validate key use cases through focused, time-boxed initiatives that demonstrate real business impact — not just technical feasibility or demo environments.</p>
+          <ul class="svc-bullets">
+            <li>Scoped use case selection</li>
+            <li>Time-boxed delivery (2–4 weeks)</li>
+            <li>Business impact measurement</li>
+            <li>Go / no-go decision framework</li>
+          </ul>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-card-inner">
+          <div class="svc-icon">📐</div>
+          <h3>AI & Data Architecture Blueprint</h3>
+          <p>Design scalable, secure, cloud-native architectures that support validated use cases today — and accommodate the growth and complexity of tomorrow.</p>
+          <ul class="svc-bullets">
+            <li>Reference architecture design</li>
+            <li>Security & governance layers</li>
+            <li>Platform selection guidance</li>
+            <li>Cost modelling & FinOps design</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-
-<!-- SCALE -->
-
-<section class="section" style="background: var(--bg-surface);">
-
-<h2>03 — Scale What Works</h2>
-
-<p style="max-width:800px;">
-Once validated, the focus shifts to building production-ready systems
-that are scalable, governed and cost-efficient.
-</p>
-
-<div class="card-grid">
-
-<div class="card">
-<h3>Platform & Architecture Scaling</h3>
-<p>
-Evolve your data and AI platforms to support production workloads,
-performance, governance and cost efficiency.
-</p>
-</div>
-
-<div class="card">
-<h3>Embedded Architecture Advisory</h3>
-<p>
-Work alongside your teams to guide implementation, decision-making
-and long-term architecture evolution.
-</p>
-</div>
-
-<div class="card">
-<h3>Fractional Architecture Leadership</h3>
-<p>
-Provide ongoing strategic direction for platform design,
-technology decisions and scaling initiatives.
-</p>
-</div>
-
-</div>
-
+<!-- PHASE 03 -->
+<section class="phase reveal">
+  <div class="phase-inner">
+    <div class="phase-header">
+      <div class="phase-number">03</div>
+      <div class="phase-heading">
+        <div class="phase-tag">Phase Three</div>
+        <h2>Scale What Works</h2>
+        <p>Once validated, the focus shifts to building production-ready systems that are scalable, governed, and cost-efficient — with ongoing advisory to ensure the platform continues to evolve.</p>
+      </div>
+    </div>
+    <div class="phase-grid">
+      <div class="svc-card">
+        <div class="svc-card-inner">
+          <div class="svc-icon">🚀</div>
+          <h3>Platform & Architecture Scaling</h3>
+          <p>Evolve your data and AI platforms to support production workloads with the performance, governance, and cost efficiency required at enterprise scale.</p>
+          <ul class="svc-bullets">
+            <li>Lakehouse & data mesh scaling</li>
+            <li>Agentic AI productionization</li>
+            <li>MLOps & LLMOps pipelines</li>
+            <li>Real-time streaming architecture</li>
+          </ul>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-card-inner">
+          <div class="svc-icon">🤝</div>
+          <h3>Embedded Architecture Advisory</h3>
+          <p>Work alongside your internal teams to guide implementation, technical decision-making, and long-term architecture evolution — without replacing your team.</p>
+          <ul class="svc-bullets">
+            <li>Weekly architecture reviews</li>
+            <li>Technical decision support</li>
+            <li>Code & design reviews</li>
+            <li>Team upskilling & enablement</li>
+          </ul>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-card-inner">
+          <div class="svc-icon">🏛️</div>
+          <h3>Fractional Architecture Leadership</h3>
+          <p>Provide ongoing strategic direction for platform design, technology selection, and scaling initiatives — as a trusted extension of your leadership team.</p>
+          <ul class="svc-bullets">
+            <li>CTO / Head of Data advisory</li>
+            <li>Technology roadmap ownership</li>
+            <li>Vendor & platform evaluation</li>
+            <li>Board & stakeholder reporting</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- TECH CAPABILITIES -->
+<section class="cap-strip reveal">
+  <div class="cap-strip-inner">
+    <div style="font-size:0.75rem;font-weight:600;letter-spacing:0.2em;color:var(--violet-light);text-transform:uppercase;margin-bottom:0.75rem;">Technology Expertise</div>
+    <h2>Built on the platforms that matter</h2>
+    <p>Deep, certified expertise across the modern AI and data stack — so every architecture recommendation is grounded in real-world delivery experience.</p>
+    <div class="tech-tags">
+      <div class="tech-tag">❄️ Snowflake</div>
+      <div class="tech-tag">🔷 Microsoft Fabric</div>
+      <div class="tech-tag">☁️ Azure</div>
+      <div class="tech-tag">⚡ AWS</div>
+      <div class="tech-tag">🤖 OpenAI / Azure OpenAI</div>
+      <div class="tech-tag">🧱 Databricks</div>
+      <div class="tech-tag">🔥 Apache Spark</div>
+      <div class="tech-tag">🌊 dbt</div>
+      <div class="tech-tag">📊 Power BI</div>
+      <div class="tech-tag">🔗 LangGraph</div>
+      <div class="tech-tag">🤝 AutoGen</div>
+      <div class="tech-tag">🐍 Snowpark</div>
+      <div class="tech-tag">🔍 Azure AI Search</div>
+      <div class="tech-tag">🏗️ Terraform</div>
+    </div>
+  </div>
+</section>
 
 <!-- POSITIONING STRIP -->
-
-<section class="section" style="text-align:center; border-top: 1px solid var(--border);">
-
-<p style="font-size:18px; max-width:800px; margin:auto; color: var(--text-muted);">
-This is not about delivering projects.  
-It is about designing systems that continue to deliver value as they scale.
-</p>
-
+<section class="strip reveal">
+  <div class="strip-inner">
+    <p>This is not about delivering projects.<br><strong>It is about designing systems that continue to deliver value as they scale.</strong></p>
+  </div>
 </section>
-
 
 <!-- CTA -->
-
-<section class="section">
-
-<h2>Need Clarity on What to Build?</h2>
-
-<p style="max-width:800px;">
-Whether you are exploring AI opportunities or scaling an existing
-platform, Decyra helps you focus on what matters—and how to build it right.
-</p>
-
-<a class="button" href="contact.html">Start a Conversation</a>
-
+<section class="cta reveal">
+  <div class="cta-inner">
+    <div style="font-size:0.75rem;font-weight:600;letter-spacing:0.2em;color:var(--violet-light);text-transform:uppercase;margin-bottom:0.75rem;">Ready to Start?</div>
+    <h2>Need Clarity on What to Build?</h2>
+    <p>Whether you are exploring AI opportunities for the first time or scaling an existing platform, Decyra helps you focus on what matters — and how to build it right.</p>
+    <div class="btn-row">
+      <a href="contact.html" class="btn-primary">Start a Conversation ↗</a>
+      <a href="architectures.html" class="btn-secondary">View Architectures</a>
+    </div>
+  </div>
 </section>
 
-
+<!-- FOOTER -->
 <footer>
-
-© 2026 Decyra | Data & AI Architecture Advisory
-
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">DECYRA</div>
+        <p>Architecting intelligent enterprises through Agentic AI, Microsoft Fabric, Snowflake, and cloud-native platforms that deliver real outcomes.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="services.html">Opportunity Assessment</a>
+        <a href="services.html">Architecture Blueprint</a>
+        <a href="services.html">Proof of Value</a>
+        <a href="services.html">Platform Scaling</a>
+        <a href="services.html">Fractional Advisory</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="case-studies.html">Case Studies</a>
+        <a href="architectures.html">Architectures</a>
+        <a href="#">Qrynix™</a>
+        <a href="insights.html">Insights</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="contact.html">Contact Us</a>
+        <a href="https://linkedin.com/in/MukundKumarMishra-BigData-Cloud-Consultant" target="_blank">LinkedIn</a>
+        <a href="mailto:thisismukund@gmail.com">Email</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Decyra Technologies. All rights reserved.</span>
+      <span>Enterprise AI • Microsoft Fabric • Snowflake</span>
+    </div>
+  </div>
 </footer>
 
+<script>
+const els = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.08});
+els.forEach(el=>obs.observe(el));
+</script>
 </body>
-
 </html>
