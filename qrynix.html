@@ -1,272 +1,588 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Qrynix | AI-Powered Text to SQL for Spark | Decyra</title>
-<link rel="stylesheet" href="style.css">
-</head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --obsidian:#0A0A0F;
+  --obsidian2:#0F0F1A;
+  --violet:#7C3AED;
+  --violet-light:#9D5CF6;
+  --violet-glow:rgba(124,58,237,0.3);
+  --ice:#38BDF8;
+  --ice-glow:rgba(56,189,248,0.2);
+  --green:#4ADE80;
+  --white:#F8F8FF;
+  --muted:#9CA3AF;
+  --card-bg:rgba(255,255,255,0.03);
+  --card-border:rgba(255,255,255,0.07);
+  --glass:rgba(124,58,237,0.08);
+  --mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--obsidian);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--obsidian);}
+::-webkit-scrollbar-thumb{background:var(--violet);border-radius:2px;}
 
+/* HEADER */
+.header{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:72px;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--card-border);}
+.logo img{height:36px;object-fit:contain;}
+.logo-text{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--white),var(--violet-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+nav{display:flex;gap:2rem;align-items:center;}
+nav a{color:var(--muted);text-decoration:none;font-size:0.875rem;font-weight:500;letter-spacing:0.02em;transition:color 0.2s;}
+nav a:hover{color:var(--white);}
+nav a.active{color:var(--white);background:var(--violet);padding:0.5rem 1.2rem;border-radius:6px;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:140px 5% 80px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(124,58,237,0.18),transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(56,189,248,0.08),transparent 50%);pointer-events:none;}
+.hero-inner{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1;}
+.product-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.3);border-radius:100px;padding:0.4rem 1rem;font-size:0.72rem;font-weight:700;letter-spacing:0.12em;color:var(--violet-light);text-transform:uppercase;margin-bottom:1.5rem;}
+.hero h1{font-size:clamp(3rem,6vw,5rem);font-weight:900;letter-spacing:-3px;line-height:1;margin-bottom:0.25rem;}
+.hero h1 .q-grad{background:linear-gradient(135deg,var(--violet-light),var(--ice));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-tagline{font-size:1.15rem;font-weight:400;color:var(--muted);margin:1.25rem 0 1rem;line-height:1.7;max-width:480px;}
+.hero-flow{display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;flex-wrap:wrap;}
+.flow-pill{background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:0.5rem 1rem;font-size:0.8rem;font-weight:600;color:var(--white);}
+.flow-arrow{color:var(--violet-light);font-size:1rem;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:0.5rem;background:var(--violet);color:#fff;padding:0.875rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;transition:all 0.2s;}
+.btn-primary:hover{background:var(--violet-light);box-shadow:0 0 30px var(--violet-glow);}
+.btn-secondary{display:inline-flex;align-items:center;gap:0.5rem;background:transparent;color:var(--white);padding:0.875rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;border:1px solid var(--card-border);transition:all 0.2s;}
+.btn-secondary:hover{border-color:var(--violet);color:var(--violet-light);}
+
+/* TERMINAL HERO */
+.terminal{background:#05050A;border:1px solid var(--card-border);border-radius:16px;overflow:hidden;font-family:var(--mono);font-size:0.8rem;box-shadow:0 32px 64px rgba(0,0,0,0.6);}
+.terminal-header{display:flex;align-items:center;gap:0.5rem;padding:0.875rem 1.25rem;background:#0A0A12;border-bottom:1px solid var(--card-border);}
+.t-dot{width:11px;height:11px;border-radius:50%;}
+.t-red{background:#FF5F56;}
+.t-yellow{background:#FFBD2E;}
+.t-green{background:#27C93F;}
+.t-title{margin-left:0.5rem;font-size:0.72rem;color:var(--muted);letter-spacing:0.05em;}
+.terminal-body{padding:1.5rem;}
+.tl{margin-bottom:0.35rem;line-height:1.7;}
+.t-prompt{color:var(--violet-light);}
+.t-cmd{color:var(--ice);}
+.t-out{color:var(--green);}
+.t-sql-kw{color:#818CF8;}
+.t-sql-val{color:var(--white);}
+.t-comment{color:#374151;}
+.t-dim{color:#4B5563;}
+.t-cursor{display:inline-block;width:7px;height:13px;background:var(--violet-light);vertical-align:middle;animation:blink 1s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+/* STATS BAR */
+.stats-bar{padding:3.5rem 5%;background:var(--obsidian2);border-top:1px solid var(--card-border);border-bottom:1px solid var(--card-border);}
+.stats-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center;}
+.stat-val{font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,var(--violet-light),var(--ice));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.stat-lbl{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.4rem;}
+
+/* OVERVIEW */
+.overview{padding:6rem 5%;text-align:center;position:relative;overflow:hidden;}
+.overview::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(124,58,237,0.1),transparent 70%);}
+.overview-inner{max-width:720px;margin:0 auto;position:relative;z-index:1;}
+.section-tag{font-size:0.72rem;font-weight:700;letter-spacing:0.2em;color:var(--violet-light);text-transform:uppercase;margin-bottom:0.75rem;}
+.overview h2{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;letter-spacing:-1.5px;margin-bottom:1rem;}
+.overview p{color:var(--muted);font-size:1rem;line-height:1.85;}
+
+/* HOW IT WORKS */
+.how{padding:6rem 5%;background:var(--obsidian2);border-top:1px solid var(--card-border);}
+.how-inner{max-width:1200px;margin:0 auto;}
+.section-header{margin-bottom:3.5rem;text-align:center;}
+.section-header h2{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;letter-spacing:-1.5px;margin-bottom:0.75rem;}
+.section-header p{color:var(--muted);font-size:0.95rem;max-width:540px;margin:0 auto;line-height:1.75;}
+.how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative;}
+.how-steps::before{content:'';position:absolute;top:52px;left:calc(16.66% + 24px);right:calc(16.66% + 24px);height:1px;background:linear-gradient(to right,var(--violet),var(--ice));z-index:0;}
+.how-step{text-align:center;padding:2rem 1.5rem;position:relative;z-index:1;}
+.step-circle{width:56px;height:56px;border-radius:50%;border:2px solid var(--violet);background:var(--obsidian2);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:1.4rem;position:relative;}
+.step-circle::after{content:attr(data-num);position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:var(--violet);font-size:0.6rem;font-weight:800;display:flex;align-items:center;justify-content:center;color:#fff;}
+.how-step h3{font-size:1rem;font-weight:700;margin-bottom:0.5rem;}
+.how-step p{font-size:0.85rem;color:var(--muted);line-height:1.7;}
+
+/* CAPABILITIES */
+.capabilities{padding:6rem 5%;}
+.cap-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.cap-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:2rem;transition:all 0.3s;position:relative;overflow:hidden;}
+.cap-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--violet-glow),transparent);opacity:0;transition:opacity 0.3s;}
+.cap-card:hover{border-color:var(--violet);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.4);}
+.cap-card:hover::before{opacity:1;}
+.cap-card-inner{position:relative;z-index:1;}
+.cap-icon{width:48px;height:48px;border-radius:12px;background:var(--glass);border:1px solid rgba(124,58,237,0.2);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.25rem;}
+.cap-card h3{font-size:1rem;font-weight:700;margin-bottom:0.6rem;}
+.cap-card p{font-size:0.85rem;color:var(--muted);line-height:1.75;}
+.cap-tag{display:inline-block;margin-top:1rem;font-size:0.65rem;font-weight:600;letter-spacing:0.1em;color:var(--ice);background:rgba(56,189,248,0.07);border:1px solid rgba(56,189,248,0.15);border-radius:100px;padding:0.25rem 0.75rem;}
+
+/* INSTALLATION */
+.install{padding:6rem 5%;background:var(--obsidian2);border-top:1px solid var(--card-border);}
+.install-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.install h2{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;letter-spacing:-1.5px;margin-bottom:1rem;}
+.install p{color:var(--muted);font-size:0.95rem;line-height:1.85;margin-bottom:2rem;}
+.install-steps{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;}
+.install-step{display:flex;align-items:flex-start;gap:1rem;}
+.i-num{width:24px;height:24px;border-radius:50%;background:var(--violet);font-size:0.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.i-text h4{font-size:0.875rem;font-weight:700;margin-bottom:0.15rem;}
+.i-text p{font-size:0.8rem;color:var(--muted);}
+.code-block{background:#05050A;border:1px solid var(--card-border);border-radius:12px;overflow:hidden;font-family:var(--mono);}
+.code-block-header{display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1.25rem;background:#0A0A12;border-bottom:1px solid var(--card-border);}
+.code-block-title{font-size:0.72rem;color:var(--muted);letter-spacing:0.05em;}
+.copy-badge{font-size:0.65rem;color:var(--violet-light);cursor:pointer;padding:0.2rem 0.6rem;border:1px solid rgba(124,58,237,0.3);border-radius:4px;}
+.code-block pre{padding:1.5rem;font-size:0.8rem;line-height:1.8;overflow-x:auto;}
+.c-comment{color:#374151;}
+.c-cmd{color:var(--ice);}
+.c-kw{color:#818CF8;}
+.c-str{color:var(--green);}
+.c-var{color:#F59E0B;}
+
+/* USE CASES */
+.usecases{padding:6rem 5%;}
+.uc-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.uc-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:2rem;transition:all 0.3s;}
+.uc-card:hover{border-color:var(--ice);transform:translateX(3px);}
+.uc-icon{font-size:1.75rem;margin-bottom:1rem;}
+.uc-card h3{font-size:1rem;font-weight:700;margin-bottom:0.6rem;}
+.uc-card p{font-size:0.85rem;color:var(--muted);line-height:1.75;}
+.uc-list{list-style:none;margin-top:1rem;display:flex;flex-direction:column;gap:0.4rem;}
+.uc-list li{font-size:0.78rem;color:var(--muted);display:flex;align-items:center;gap:0.5rem;}
+.uc-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--ice);flex-shrink:0;}
+
+/* PLATFORMS */
+.platforms{padding:4rem 5%;background:var(--obsidian2);border-top:1px solid var(--card-border);border-bottom:1px solid var(--card-border);text-align:center;}
+.platforms-inner{max-width:900px;margin:0 auto;}
+.platforms p{color:var(--muted);font-size:0.875rem;margin-bottom:1.5rem;}
+.platform-tags{display:flex;justify-content:center;flex-wrap:wrap;gap:0.75rem;}
+.platform-tag{background:var(--card-bg);border:1px solid var(--card-border);border-radius:100px;padding:0.5rem 1.25rem;font-size:0.8rem;font-weight:600;color:var(--muted);transition:all 0.2s;}
+.platform-tag:hover{border-color:var(--violet);color:var(--white);}
+
+/* CTA */
+.cta{padding:8rem 5%;text-align:center;position:relative;overflow:hidden;}
+.cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(124,58,237,0.18),transparent 70%);}
+.cta-inner{max-width:650px;margin:0 auto;position:relative;z-index:1;}
+.cta h2{font-size:clamp(2rem,4vw,3rem);font-weight:900;letter-spacing:-1.5px;margin-bottom:1rem;}
+.cta p{color:var(--muted);font-size:1rem;line-height:1.8;margin-bottom:2.5rem;}
+.btn-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+footer{background:var(--obsidian2);border-top:1px solid var(--card-border);padding:4rem 5% 2rem;}
+.footer-inner{max-width:1200px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
+.footer-brand p{color:var(--muted);font-size:0.875rem;line-height:1.7;margin-top:1rem;max-width:280px;}
+.footer-col h4{font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.25rem;}
+.footer-col a{display:block;color:var(--muted);text-decoration:none;font-size:0.875rem;margin-bottom:0.75rem;transition:color 0.2s;}
+.footer-col a:hover{color:var(--white);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;border-top:1px solid var(--card-border);font-size:0.8rem;color:var(--muted);}
+.footer-logo{font-size:1.3rem;font-weight:900;background:linear-gradient(135deg,var(--white),var(--violet-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(30px);transition:all 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:900px){
+  .hero-inner,.install-inner,.footer-top{grid-template-columns:1fr;}
+  .how-steps,.cap-grid,.uc-grid{grid-template-columns:1fr;}
+  .how-steps::before{display:none;}
+  .stats-inner{grid-template-columns:repeat(2,1fr);}
+  nav{display:none;}
+}
+</style>
+</head>
 <body>
 
-<header>
-
-<div class="logo">
-  <a href="index.html">
-    <img src="./images/Decyra_logo.png" alt="Decyra Logo" style="height:50px;">
-  </a>
-</div>
-
-<nav>
-<a href="index.html">Home</a>
-<a href="services.html">Services</a>
-<a href="architectures.html">Architectures</a>
-<a href="use-cases.html">Use Cases</a>
-<a href="case-studies.html">Case Studies</a>
-<a href="about.html">About</a>
-<a href="insights.html">Insights</a>
-<a href="contact.html">Contact</a>
-</nav>
-
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">
+    <a href="index.html">
+      <img src="./images/Decyra_logo.png" alt="Decyra" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="logo-text" style="display:none">DECYRA</span>
+    </a>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="architectures.html">Architectures</a>
+    <a href="use-cases.html">Use Cases</a>
+    <a href="case-studies.html">Case Studies</a>
+    <a href="about.html">About</a>
+    <a href="insights.html">Insights</a>
+    <a href="contact.html">Contact</a>
+  </nav>
 </header>
 
-
 <!-- HERO -->
-
-<section class="hero-impact">
-
-<div class="container">
-
-<span class="label" style="color: var(--accent); margin-bottom:20px; display:block;">
-AI Accelerator for Data Engineering
-</span>
-
-<h1>
-Qrynix<br>
-<span class="highlight">Natural Language to Spark SQL</span>
-</h1>
-
-<p class="subtitle">
-Qrynix transforms plain English questions into Spark SQL queries,
-helping enterprises accelerate analytics, improve productivity,
-and simplify access to modern data platforms.
-</p>
-
-<a class="button" href="https://pypi.org/project/qrynix/" target="_blank">
-Explore Qrynix
-</a>
-
-</div>
-
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="product-badge">⚡ AI Accelerator for Data Engineering</div>
+      <h1 style="font-size:clamp(3.5rem,7vw,6rem);">Qrynix<span class="q-grad">™</span></h1>
+      <p style="font-size:1rem;font-family:'JetBrains Mono',monospace;color:var(--ice);font-weight:600;letter-spacing:0.05em;margin-bottom:1.25rem;">Natural Language → Spark SQL</p>
+      <p class="hero-tagline">Qrynix transforms plain English business questions into optimized Spark SQL queries — helping enterprises accelerate analytics, reduce engineering effort, and democratize access to modern data platforms.</p>
+      <div class="hero-flow">
+        <div class="flow-pill">💬 Ask</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-pill">⚡ Generate</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-pill">📊 Analyze</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-pill">🚀 Decide</div>
+      </div>
+      <div class="hero-btns">
+        <a href="https://pypi.org/project/qrynix/" target="_blank" class="btn-primary">View on PyPI ↗</a>
+        <a href="contact.html" class="btn-secondary">Talk to Us</a>
+      </div>
+    </div>
+    <div>
+      <div class="terminal">
+        <div class="terminal-header">
+          <div class="t-dot t-red"></div>
+          <div class="t-dot t-yellow"></div>
+          <div class="t-dot t-green"></div>
+          <span class="t-title">qrynix — natural language to spark sql</span>
+        </div>
+        <div class="terminal-body">
+          <div class="tl"><span class="t-comment"># Install Qrynix</span></div>
+          <div class="tl"><span class="t-prompt">$ </span><span class="t-cmd">pip install qrynix</span></div>
+          <div class="tl"><span class="t-out">✓ Successfully installed qrynix</span></div>
+          <br>
+          <div class="tl"><span class="t-comment"># Ask a business question</span></div>
+          <div class="tl"><span class="t-prompt">>>> </span><span class="t-cmd">from qrynix import Qrynix</span></div>
+          <div class="tl"><span class="t-prompt">>>> </span><span class="t-cmd">q = Qrynix(schema=schema)</span></div>
+          <div class="tl"><span class="t-prompt">>>> </span><span class="t-cmd">q.ask(<span class="t-out">"Top 10 customers by revenue this quarter, by region"</span>)</span></div>
+          <br>
+          <div class="tl"><span class="t-out">✓ Generating optimized Spark SQL...</span></div>
+          <br>
+          <div class="tl"><span class="t-sql-kw">SELECT</span> <span class="t-sql-val">customer_name, region,</span></div>
+          <div class="tl" style="padding-left:1.2rem;"><span class="t-sql-kw">SUM</span><span class="t-sql-val">(revenue) AS total_revenue</span></div>
+          <div class="tl"><span class="t-sql-kw">FROM</span> <span class="t-sql-val">sales.transactions</span></div>
+          <div class="tl"><span class="t-sql-kw">WHERE</span> <span class="t-sql-val">quarter = </span><span class="t-sql-kw">CURRENT_QUARTER</span><span class="t-sql-val">()</span></div>
+          <div class="tl"><span class="t-sql-kw">GROUP BY</span> <span class="t-sql-val">customer_name, region</span></div>
+          <div class="tl"><span class="t-sql-kw">ORDER BY</span> <span class="t-sql-val">total_revenue </span><span class="t-sql-kw">DESC LIMIT</span> <span class="t-sql-val">10</span></div>
+          <br>
+          <div class="tl"><span class="t-out">✓ Query ready</span> <span class="t-dim">— 0.3s</span> <span class="t-cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-
-<!-- IMPACT STRIP -->
-
-<section class="summary-bar">
-
-<div class="grid-3">
-
-<div class="summary-item">
-<small>Category</small>
-<p>AI Data Accelerator</p>
-</div>
-
-<div class="summary-item">
-<small>Technology</small>
-<p>Spark SQL + GenAI</p>
-</div>
-
-<div class="summary-item">
-<small>Outcome</small>
-<p>Faster Analytics Delivery</p>
-</div>
-
-</div>
-
+<!-- STATS -->
+<section class="stats-bar reveal">
+  <div class="stats-inner">
+    <div>
+      <div class="stat-val">10x</div>
+      <div class="stat-lbl">Faster Query Development</div>
+    </div>
+    <div>
+      <div class="stat-val">0</div>
+      <div class="stat-lbl">SQL Expertise Required</div>
+    </div>
+    <div>
+      <div class="stat-val">3+</div>
+      <div class="stat-lbl">Platform Integrations</div>
+    </div>
+    <div>
+      <div class="stat-val">PyPI</div>
+      <div class="stat-lbl">Open to Install</div>
+    </div>
+  </div>
 </section>
-
 
 <!-- OVERVIEW -->
-
-<section class="section" style="text-align:center; background:#020617;">
-
-<h2>Conversational Analytics for Modern Data Platforms</h2>
-
-<p style="font-size:22px; margin-top:10px;">
-Ask Questions → Generate SQL → Analyze Faster
-</p>
-
-<p style="max-width:700px; margin:auto; color: var(--text-muted);">
-Qrynix enables analysts, engineers and business teams
-to interact with Spark-powered data platforms using natural language.
-Instead of manually writing SQL, teams can generate queries instantly using AI.
-</p>
-
+<section class="overview reveal">
+  <div class="overview-inner">
+    <div class="section-tag">What is Qrynix</div>
+    <h2>Conversational Analytics for<br>Modern Data Platforms</h2>
+    <p>Qrynix enables analysts, engineers, and business teams to interact with Spark-powered data platforms using natural language. Instead of manually writing complex SQL, teams generate optimized queries instantly — reducing friction and accelerating time-to-insight across the entire organization.</p>
+  </div>
 </section>
-
-
-<!-- CAPABILITIES -->
-
-<section class="section">
-
-<h2>Core Capabilities</h2>
-
-<div class="card-grid">
-
-<div class="card">
-<h3>Natural Language to SQL</h3>
-<p>
-Convert plain English business questions into Spark SQL queries
-using AI-assisted query generation.
-</p>
-</div>
-
-<div class="card">
-<h3>Faster Analytics Development</h3>
-<p>
-Reduce development effort and accelerate reporting,
-exploration and analytics workflows.
-</p>
-</div>
-
-<div class="card">
-<h3>Enterprise Data Platforms</h3>
-<p>
-Designed for modern lakehouse ecosystems including
-Spark, Snowflake and Microsoft Fabric environments.
-</p>
-</div>
-
-</div>
-
-</section>
-
 
 <!-- HOW IT WORKS -->
-
-<section class="section">
-
-<h2>How Qrynix Works</h2>
-
-<div class="card-grid">
-
-<div class="card">
-<h3>Understand</h3>
-<p>
-Users ask business questions in natural language.
-</p>
-</div>
-
-<div class="card">
-<h3>Generate</h3>
-<p>
-AI generates optimized Spark SQL queries automatically.
-</p>
-</div>
-
-<div class="card">
-<h3>Accelerate</h3>
-<p>
-Teams analyze data faster and improve decision-making efficiency.
-</p>
-</div>
-
-</div>
-
+<section class="how reveal">
+  <div class="how-inner">
+    <div class="section-header">
+      <div class="section-tag">How It Works</div>
+      <h2>Three Steps to Instant Analytics</h2>
+      <p>A simple, powerful loop that transforms how your team interacts with data</p>
+    </div>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="step-circle" data-num="1">💬</div>
+        <h3>Understand</h3>
+        <p>Users ask business questions in plain English — no SQL knowledge required. Qrynix understands context, intent, and your data schema.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-circle" data-num="2">⚡</div>
+        <h3>Generate</h3>
+        <p>AI generates optimized, production-ready Spark SQL queries automatically — taking schema structure, relationships, and best practices into account.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-circle" data-num="3">📈</div>
+        <h3>Accelerate</h3>
+        <p>Teams analyze data faster, reduce engineering bottlenecks, and improve decision-making velocity across every function in the business.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- CAPABILITIES -->
+<section class="capabilities reveal">
+  <div class="section-header" style="max-width:1200px;margin:0 auto 3.5rem;text-align:center;">
+    <div class="section-tag">Core Capabilities</div>
+    <h2>Built for the Modern Data Stack</h2>
+    <p style="color:var(--muted);font-size:0.95rem;max-width:540px;margin:0 auto;line-height:1.75;">Everything your team needs to unlock self-service analytics on enterprise-scale data platforms</p>
+  </div>
+  <div class="cap-grid">
+    <div class="cap-card">
+      <div class="cap-card-inner">
+        <div class="cap-icon">🧠</div>
+        <h3>Natural Language to SQL</h3>
+        <p>Convert plain English business questions into optimized Spark SQL queries using AI-assisted generation — with context awareness and schema understanding built in.</p>
+        <span class="cap-tag">GenAI · Schema-Aware</span>
+      </div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-card-inner">
+        <div class="cap-icon">⚡</div>
+        <h3>Faster Analytics Development</h3>
+        <p>Reduce development effort by up to 10x. Accelerate reporting cycles, data exploration, and analytics workflows — without sacrificing query quality or performance.</p>
+        <span class="cap-tag">10x Speed · Lower Cost</span>
+      </div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-card-inner">
+        <div class="cap-icon">🏗️</div>
+        <h3>Enterprise Platform Native</h3>
+        <p>Designed for modern lakehouse ecosystems — natively compatible with Apache Spark, Snowflake, and Microsoft Fabric environments at any scale.</p>
+        <span class="cap-tag">Spark · Snowflake · Fabric</span>
+      </div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-card-inner">
+        <div class="cap-icon">🔍</div>
+        <h3>Schema Intelligence</h3>
+        <p>Qrynix understands your table relationships, column types, and naming conventions — generating queries that reflect your actual data model, not generic templates.</p>
+        <span class="cap-tag">Metadata-Aware · Context-Rich</span>
+      </div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-card-inner">
+        <div class="cap-icon">🔒</div>
+        <h3>Enterprise-Ready</h3>
+        <p>Designed with security and governance in mind — integrates with your existing access controls and data governance frameworks without exposing raw model internals.</p>
+        <span class="cap-tag">Secure · Governed</span>
+      </div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-card-inner">
+        <div class="cap-icon">📦</div>
+        <h3>Simple Python Integration</h3>
+        <p>Install with a single pip command and integrate into any Python data workflow — works with notebooks, pipelines, applications, and CLI tooling out of the box.</p>
+        <span class="cap-tag">pip install qrynix</span>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- INSTALLATION -->
+<section class="install reveal">
+  <div class="install-inner">
+    <div>
+      <div class="section-tag">Quick Start</div>
+      <h2>Up and Running in Minutes</h2>
+      <p>Install Qrynix directly from PyPI and start building AI-powered analytics workflows in your existing Python environment — no complex setup, no infrastructure changes required.</p>
+      <div class="install-steps">
+        <div class="install-step">
+          <div class="i-num">1</div>
+          <div class="i-text">
+            <h4>Install from PyPI</h4>
+            <p>One command gets you started — works in any Python 3.8+ environment</p>
+          </div>
+        </div>
+        <div class="install-step">
+          <div class="i-num">2</div>
+          <div class="i-text">
+            <h4>Connect your schema</h4>
+            <p>Pass in your table schema so Qrynix understands your data model</p>
+          </div>
+        </div>
+        <div class="install-step">
+          <div class="i-num">3</div>
+          <div class="i-text">
+            <h4>Start asking questions</h4>
+            <p>Ask business questions in plain English — get production-ready Spark SQL instantly</p>
+          </div>
+        </div>
+      </div>
+      <a href="https://pypi.org/project/qrynix/" target="_blank" class="btn-primary">View on PyPI ↗</a>
+    </div>
+    <div>
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-title">python · quickstart.py</span>
+          <span class="copy-badge">copy</span>
+        </div>
+        <pre><span class="c-comment"># Install</span>
+<span class="c-cmd">pip install qrynix</span>
 
-<section class="section" style="background:#020617;">
+<span class="c-comment"># Import and initialise</span>
+<span class="c-kw">from</span> qrynix <span class="c-kw">import</span> Qrynix
 
-<h2>Quick Installation</h2>
+<span class="c-comment"># Define your schema</span>
+schema = {
+  <span class="c-str">"sales.transactions"</span>: [
+    <span class="c-str">"customer_id"</span>, <span class="c-str">"revenue"</span>,
+    <span class="c-str">"region"</span>, <span class="c-str">"quarter"</span>
+  ]
+}
 
-<p style="color: var(--text-muted);">
-Install Qrynix directly from PyPI and start building
-AI-powered analytics workflows.
-</p>
+<span class="c-comment"># Initialise Qrynix</span>
+<span class="c-var">q</span> = Qrynix(schema=schema)
 
-<div class="card" style="max-width:700px; margin:auto; text-align:left;">
+<span class="c-comment"># Ask a business question</span>
+sql = <span class="c-var">q</span>.ask(
+  <span class="c-str">"Top 10 customers by revenue,</span>
+<span class="c-str">   broken down by region"</span>
+)
 
-<pre style="overflow:auto; color:#38bdf8;">
-pip install qrynix
-</pre>
-
-</div>
-
-<div style="margin-top:30px;">
-
-<a class="button" href="https://pypi.org/project/qrynix/" target="_blank">
-View on PyPI
-</a>
-
-</div>
-
+<span class="c-kw">print</span>(sql)
+<span class="c-comment"># → Optimized Spark SQL ready to run</span></pre>
+      </div>
+    </div>
+  </div>
 </section>
-
 
 <!-- USE CASES -->
-
-<section class="section">
-
-<h2>Ideal Use Cases</h2>
-
-<div class="card-grid">
-
-<div class="card">
-<h3>Self-Service Analytics</h3>
-<p>
-Enable business users to explore enterprise data
-without deep SQL expertise.
-</p>
-</div>
-
-<div class="card">
-<h3>AI-Powered Data Engineering</h3>
-<p>
-Improve productivity for engineering and analytics teams
-working with Spark ecosystems.
-</p>
-</div>
-
-<div class="card">
-<h3>Lakehouse Intelligence</h3>
-<p>
-Bring conversational AI experiences to modern
-lakehouse and enterprise data platforms.
-</p>
-</div>
-
-</div>
-
+<section class="usecases reveal">
+  <div class="section-header" style="max-width:1200px;margin:0 auto 3.5rem;text-align:center;">
+    <div class="section-tag">Ideal For</div>
+    <h2>Who Uses Qrynix</h2>
+    <p style="color:var(--muted);font-size:0.95rem;max-width:500px;margin:0 auto;line-height:1.75;">Built for every role that needs fast, reliable answers from enterprise data</p>
+  </div>
+  <div class="uc-grid" style="max-width:1200px;margin:0 auto;">
+    <div class="uc-card">
+      <div class="uc-icon">👩‍💼</div>
+      <h3>Self-Service Analytics</h3>
+      <p>Enable business analysts and non-technical stakeholders to explore enterprise data without SQL expertise — democratizing access to insights across the organization.</p>
+      <ul class="uc-list">
+        <li>No SQL knowledge required</li>
+        <li>Instant answers to business questions</li>
+        <li>Reduced dependency on data engineering</li>
+      </ul>
+    </div>
+    <div class="uc-card">
+      <div class="uc-icon">👨‍💻</div>
+      <h3>AI-Powered Data Engineering</h3>
+      <p>Improve productivity for data engineers and analytics teams working with Spark ecosystems — accelerating query development, prototyping, and reporting workflows.</p>
+      <ul class="uc-list">
+        <li>10x faster query prototyping</li>
+        <li>Schema-aware generation</li>
+        <li>Integrates with existing pipelines</li>
+      </ul>
+    </div>
+    <div class="uc-card">
+      <div class="uc-icon">🏛️</div>
+      <h3>Lakehouse Intelligence</h3>
+      <p>Bring conversational AI experiences to modern lakehouse and enterprise data platforms — making your Fabric, Spark, or Snowflake investment accessible to every team.</p>
+      <ul class="uc-list">
+        <li>Microsoft Fabric compatible</li>
+        <li>Snowflake & Spark native</li>
+        <li>Works across medallion layers</li>
+      </ul>
+    </div>
+  </div>
 </section>
 
-
-<!-- FINAL CTA -->
-
-<section class="section">
-
-<h2>Build Smarter AI Data Systems</h2>
-
-<p>
-Decyra helps enterprises design AI-native architectures,
-modern data platforms and intelligent analytics systems.
-</p>
-
-<a class="button" href="contact.html">
-Start a Conversation
-</a>
-
+<!-- PLATFORMS -->
+<section class="platforms reveal">
+  <div class="platforms-inner">
+    <div class="section-tag" style="margin-bottom:0.75rem;">Compatible Platforms</div>
+    <h2 style="font-size:1.4rem;font-weight:800;margin-bottom:1rem;">Works across your entire modern data stack</h2>
+    <p>Qrynix is designed to integrate seamlessly with the platforms you already use</p>
+    <div class="platform-tags" style="margin-top:1.5rem;">
+      <div class="platform-tag">🔥 Apache Spark</div>
+      <div class="platform-tag">❄️ Snowflake</div>
+      <div class="platform-tag">🔷 Microsoft Fabric</div>
+      <div class="platform-tag">🧱 Databricks</div>
+      <div class="platform-tag">☁️ Azure Synapse</div>
+      <div class="platform-tag">📓 Jupyter Notebooks</div>
+      <div class="platform-tag">🐍 Python 3.8+</div>
+    </div>
+  </div>
 </section>
 
+<!-- CTA -->
+<section class="cta reveal">
+  <div class="cta-inner">
+    <div class="section-tag">Get Started</div>
+    <h2>Build Smarter AI Data Systems</h2>
+    <p>Decyra helps enterprises design AI-native architectures, modern data platforms, and intelligent analytics systems — with Qrynix at the core of the analytics experience.</p>
+    <div class="btn-row">
+      <a href="https://pypi.org/project/qrynix/" target="_blank" class="btn-primary">Install Qrynix ↗</a>
+      <a href="contact.html" class="btn-secondary">Talk to Decyra</a>
+    </div>
+  </div>
+</section>
 
+<!-- FOOTER -->
 <footer>
-
-© 2026 Decyra | Data & AI Architecture Advisory
-
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">DECYRA</div>
+        <p>Architecting intelligent enterprises through Agentic AI, Microsoft Fabric, Snowflake, and cloud-native platforms that deliver real outcomes.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="services.html">Opportunity Assessment</a>
+        <a href="services.html">Architecture Blueprint</a>
+        <a href="services.html">Proof of Value</a>
+        <a href="services.html">Platform Scaling</a>
+        <a href="services.html">Fractional Advisory</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="case-studies.html">Case Studies</a>
+        <a href="architectures.html">Architectures</a>
+        <a href="contact.html">Qrynix™</a>
+        <a href="insights.html">Insights</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="contact.html">Contact Us</a>
+        <a href="https://linkedin.com/in/MukundKumarMishra-BigData-Cloud-Consultant" target="_blank">LinkedIn</a>
+        <a href="mailto:thisismukund@gmail.com">Email</a>
+        <a href="https://pypi.org/project/qrynix/" target="_blank">PyPI</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Decyra Technologies. All rights reserved.</span>
+      <span>Enterprise AI • Microsoft Fabric • Snowflake</span>
+    </div>
+  </div>
 </footer>
 
-</body>
+<script>
+// copy badge
+document.querySelector('.copy-badge')?.addEventListener('click',function(){
+  const code = document.querySelector('.code-block pre').innerText;
+  navigator.clipboard.writeText(code).then(()=>{
+    this.textContent='copied!';
+    setTimeout(()=>this.textContent='copy',2000);
+  });
+});
 
+// reveal
+const els = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.08});
+els.forEach(el=>obs.observe(el));
+</script>
+</body>
 </html>
