@@ -1,241 +1,571 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Decyra | Agentic AI, Microsoft Fabric & Snowflake</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --obsidian:#0A0A0F;
+  --obsidian2:#0F0F1A;
+  --violet:#7C3AED;
+  --violet-light:#9D5CF6;
+  --violet-glow:rgba(124,58,237,0.3);
+  --ice:#38BDF8;
+  --ice-glow:rgba(56,189,248,0.2);
+  --gold:#F59E0B;
+  --white:#F8F8FF;
+  --muted:#9CA3AF;
+  --card-bg:rgba(255,255,255,0.03);
+  --card-border:rgba(255,255,255,0.07);
+  --glass:rgba(124,58,237,0.08);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--obsidian);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;}
 
-<link rel="stylesheet" href="style.css">
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--obsidian);}
+::-webkit-scrollbar-thumb{background:var(--violet);border-radius:2px;}
+
+/* HEADER */
+.header{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:72px;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--card-border);}
+.logo img{height:36px;object-fit:contain;}
+.logo-text{font-size:1.5rem;font-weight:800;letter-spacing:-0.5px;background:linear-gradient(135deg,var(--white),var(--violet-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+nav{display:flex;gap:2rem;align-items:center;}
+nav a{color:var(--muted);text-decoration:none;font-size:0.875rem;font-weight:500;letter-spacing:0.02em;transition:color 0.2s;}
+nav a:hover{color:var(--white);}
+nav a.cta-nav{color:var(--white);background:var(--violet);padding:0.5rem 1.2rem;border-radius:6px;transition:background 0.2s;}
+nav a.cta-nav:hover{background:var(--violet-light);}
+
+/* CANVAS HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:120px 5% 80px;overflow:hidden;}
+#particle-canvas{position:absolute;inset:0;z-index:0;}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1200px;margin:0 auto;width:100%;}
+.eyebrow{font-size:0.75rem;font-weight:600;letter-spacing:0.2em;color:var(--ice);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.5rem;}
+.eyebrow::before{content:'';width:32px;height:1px;background:var(--ice);}
+h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:1.5rem;}
+h1 span.grad{background:linear-gradient(135deg,var(--violet-light),var(--ice));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{font-size:1.1rem;color:var(--muted);line-height:1.7;max-width:480px;margin-bottom:2.5rem;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:0.5rem;background:var(--violet);color:#fff;padding:0.875rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;transition:all 0.2s;border:1px solid var(--violet);}
+.btn-primary:hover{background:var(--violet-light);box-shadow:0 0 30px var(--violet-glow);}
+.btn-secondary{display:inline-flex;align-items:center;gap:0.5rem;background:transparent;color:var(--white);padding:0.875rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;border:1px solid var(--card-border);transition:all 0.2s;}
+.btn-secondary:hover{border-color:var(--violet);color:var(--violet-light);}
+
+/* HERO GRAPHIC */
+.hero-graphic{display:flex;justify-content:center;align-items:center;}
+.flow-diagram{display:flex;flex-direction:column;align-items:center;gap:0;position:relative;}
+.flow-node{background:var(--glass);border:1px solid var(--card-border);border-radius:12px;padding:1rem 2rem;text-align:center;min-width:180px;position:relative;backdrop-filter:blur(10px);transition:all 0.3s;}
+.flow-node:hover{border-color:var(--violet);box-shadow:0 0 20px var(--violet-glow);}
+.flow-node .icon{font-size:1.5rem;margin-bottom:0.25rem;}
+.flow-node .label{font-size:0.75rem;font-weight:700;letter-spacing:0.1em;color:var(--muted);}
+.flow-node .title{font-size:0.95rem;font-weight:700;color:var(--white);}
+.flow-node.active{border-color:var(--violet);background:rgba(124,58,237,0.12);}
+.flow-node.ice-node{border-color:var(--ice);background:rgba(56,189,248,0.08);}
+.flow-connector{width:1px;height:32px;background:linear-gradient(to bottom,var(--violet),var(--ice));position:relative;margin:0 auto;}
+.flow-connector::after{content:'▼';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);font-size:0.6rem;color:var(--ice);}
+
+/* METRICS */
+.metrics{padding:4rem 5%;border-top:1px solid var(--card-border);border-bottom:1px solid var(--card-border);background:var(--obsidian2);}
+.metrics-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center;}
+.metric-val{font-size:2.5rem;font-weight:900;background:linear-gradient(135deg,var(--violet-light),var(--ice));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
+.metric-label{font-size:0.8rem;color:var(--muted);margin-top:0.5rem;letter-spacing:0.05em;text-transform:uppercase;}
+
+/* TRUST */
+.trust{padding:3rem 5%;background:var(--obsidian);}
+.trust-inner{max-width:1200px;margin:0 auto;}
+.trust-label{text-align:center;font-size:0.75rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;margin-bottom:2rem;}
+.trust-logos{display:flex;justify-content:center;align-items:center;gap:1.5rem;flex-wrap:wrap;}
+.trust-pill{background:var(--card-bg);border:1px solid var(--card-border);border-radius:100px;padding:0.6rem 1.5rem;font-size:0.8rem;font-weight:600;color:var(--muted);letter-spacing:0.05em;transition:all 0.2s;}
+.trust-pill:hover{border-color:var(--violet);color:var(--white);}
+
+/* VISION */
+.vision{padding:8rem 5%;text-align:center;position:relative;overflow:hidden;}
+.vision::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,var(--violet-glow),transparent 70%);pointer-events:none;}
+.vision-inner{max-width:800px;margin:0 auto;position:relative;z-index:1;}
+.vision h2{font-size:clamp(2rem,4vw,3rem);font-weight:900;line-height:1.15;letter-spacing:-1.5px;margin-bottom:1.5rem;}
+.vision h2 em{font-style:normal;background:linear-gradient(135deg,var(--violet-light),var(--ice));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.vision p{font-size:1.15rem;color:var(--muted);line-height:1.8;max-width:600px;margin:0 auto;}
+
+/* CAPABILITIES */
+.capabilities{padding:6rem 5%;background:var(--obsidian2);}
+.section-header{text-align:center;margin-bottom:4rem;}
+.section-tag{font-size:0.75rem;font-weight:600;letter-spacing:0.2em;color:var(--violet-light);text-transform:uppercase;margin-bottom:0.75rem;}
+.section-header h2{font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:800;letter-spacing:-1px;}
+.section-header p{color:var(--muted);margin-top:0.75rem;font-size:1rem;max-width:500px;margin-left:auto;margin-right:auto;}
+.cap-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;}
+.cap-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:2rem;transition:all 0.3s;position:relative;overflow:hidden;backdrop-filter:blur(10px);}
+.cap-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--violet-glow),transparent);opacity:0;transition:opacity 0.3s;}
+.cap-card:hover{border-color:var(--violet);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.4);}
+.cap-card:hover::before{opacity:1;}
+.cap-icon{width:48px;height:48px;border-radius:12px;background:var(--glass);border:1px solid var(--card-border);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.25rem;}
+.cap-card h3{font-size:1.1rem;font-weight:700;margin-bottom:0.75rem;}
+.cap-card p{font-size:0.875rem;color:var(--muted);line-height:1.7;}
+.cap-tag{display:inline-block;margin-top:1rem;font-size:0.7rem;font-weight:600;letter-spacing:0.1em;color:var(--violet-light);background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);border-radius:100px;padding:0.25rem 0.75rem;}
+
+/* QRYNIX */
+.qrynix{padding:8rem 5%;position:relative;overflow:hidden;}
+.qrynix::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(56,189,248,0.05));pointer-events:none;}
+.qrynix-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1;}
+.qrynix-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.3);border-radius:100px;padding:0.4rem 1rem;font-size:0.75rem;font-weight:700;letter-spacing:0.1em;color:var(--violet-light);margin-bottom:1.5rem;}
+.qrynix h2{font-size:clamp(2rem,4vw,3rem);font-weight:900;letter-spacing:-2px;margin-bottom:0.5rem;}
+.qrynix h3{font-size:1.2rem;font-weight:400;color:var(--muted);margin-bottom:1.5rem;line-height:1.5;}
+.qrynix-features{list-style:none;display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;}
+.qrynix-features li{display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--muted);}
+.qrynix-features li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--violet-light);flex-shrink:0;}
+.qrynix-terminal{background:#050508;border:1px solid var(--card-border);border-radius:16px;padding:1.5rem;font-family:'Courier New',monospace;font-size:0.8rem;position:relative;}
+.terminal-bar{display:flex;gap:0.4rem;margin-bottom:1rem;}
+.terminal-dot{width:10px;height:10px;border-radius:50%;}
+.t-red{background:#FF5F56;}
+.t-yellow{background:#FFBD2E;}
+.t-green{background:#27C93F;}
+.terminal-line{margin-bottom:0.4rem;line-height:1.6;}
+.t-prompt{color:var(--violet-light);}
+.t-cmd{color:var(--ice);}
+.t-output{color:#4ADE80;}
+.t-comment{color:#4B5563;}
+.t-cursor{display:inline-block;width:8px;height:14px;background:var(--violet-light);animation:blink 1s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+/* ARCHITECTURES */
+.architectures{padding:6rem 5%;background:var(--obsidian2);}
+.arch-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;}
+.arch-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:2rem;transition:all 0.3s;cursor:pointer;position:relative;overflow:hidden;}
+.arch-card::after{content:'→';position:absolute;right:1.5rem;top:50%;transform:translateY(-50%);color:var(--muted);transition:all 0.3s;font-size:1.2rem;}
+.arch-card:hover{border-color:var(--ice);transform:translateX(4px);}
+.arch-card:hover::after{right:1rem;color:var(--ice);}
+.arch-number{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;color:var(--violet-light);margin-bottom:0.75rem;}
+.arch-card h3{font-size:1rem;font-weight:700;margin-bottom:0.5rem;}
+.arch-card p{font-size:0.8rem;color:var(--muted);line-height:1.6;max-width:85%;}
+
+/* CLIENTS */
+.clients{padding:5rem 5%;border-top:1px solid var(--card-border);}
+.clients-inner{max-width:1200px;margin:0 auto;text-align:center;}
+.clients-grid{display:flex;justify-content:center;flex-wrap:wrap;gap:2rem;margin-top:3rem;}
+.client-pill{background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:1rem 2rem;font-size:0.85rem;font-weight:600;color:var(--muted);min-width:140px;}
+
+/* CTA */
+.cta{padding:8rem 5%;text-align:center;position:relative;overflow:hidden;}
+.cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(124,58,237,0.2) 0%,transparent 70%);}
+.cta-inner{max-width:700px;margin:0 auto;position:relative;z-index:1;}
+.cta h2{font-size:clamp(2rem,4vw,3.5rem);font-weight:900;letter-spacing:-2px;line-height:1.1;margin-bottom:1.5rem;}
+.cta p{font-size:1.1rem;color:var(--muted);margin-bottom:2.5rem;line-height:1.7;}
+.cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+footer{background:var(--obsidian2);border-top:1px solid var(--card-border);padding:4rem 5% 2rem;}
+.footer-inner{max-width:1200px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
+.footer-brand p{color:var(--muted);font-size:0.875rem;line-height:1.7;margin-top:1rem;max-width:280px;}
+.footer-col h4{font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.25rem;}
+.footer-col a{display:block;color:var(--muted);text-decoration:none;font-size:0.875rem;margin-bottom:0.75rem;transition:color 0.2s;}
+.footer-col a:hover{color:var(--white);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;border-top:1px solid var(--card-border);font-size:0.8rem;color:var(--muted);}
+.footer-logo{font-size:1.3rem;font-weight:900;background:linear-gradient(135deg,var(--white),var(--violet-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+
+/* SCROLL ANIMATIONS */
+.reveal{opacity:0;transform:translateY(30px);transition:all 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-inner,.qrynix-inner,.footer-top{grid-template-columns:1fr;}
+  .hero-graphic{display:none;}
+  .metrics-inner{grid-template-columns:repeat(2,1fr);}
+  nav{display:none;}
+}
+</style>
 </head>
-
 <body>
 
+<!-- HEADER -->
 <header class="header">
-
-<div class="logo">
-<img src="./images/Decyra_logo.png" alt="Decyra">
-</div>
-
-<nav>
-<a href="#">Home</a>
-<a href="#">Services</a>
-<a href="#">Architectures</a>
-<a href="#">Qrynix</a>
-<a href="#">Case Studies</a>
-<a href="#">About</a>
-<a href="#">Contact</a>
-</nav>
-
+  <div class="logo">
+    <img src="./images/Decyra_logo.png" alt="Decyra" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span class="logo-text" style="display:none">DECYRA</span>
+  </div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Services</a>
+    <a href="#">Architectures</a>
+    <a href="#">Qrynix</a>
+    <a href="#">Case Studies</a>
+    <a href="#">About</a>
+    <a href="#" class="cta-nav">Contact</a>
+  </nav>
 </header>
 
+<!-- HERO -->
 <section class="hero">
-
-<div class="hero-content">
-
-<p class="eyebrow">
-AGENTIC AI • MICROSOFT FABRIC • SNOWFLAKE
-</p>
-
-<h1>
-Architecting the<br>
-Intelligent Enterprise
-</h1>
-
-<p class="hero-text">
-Designing AI-native platforms where data,
-analytics and autonomous agents work together
-to drive faster business decisions.
-</p>
-
-<div class="hero-buttons">
-<a href="#" class="btn-primary">Explore Architectures</a>
-<a href="#" class="btn-secondary">Talk to Us</a>
-</div>
-
-</div>
-
-<div class="hero-graphic">
-
-<div class="brain">
-
-<div>DATA</div>
-<div>↓</div>
-<div>INTELLIGENCE</div>
-<div>↓</div>
-<div>AI AGENTS</div>
-<div>↓</div>
-<div>OUTCOMES</div>
-
-</div>
-
-</div>
-
+  <canvas id="particle-canvas"></canvas>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <p class="eyebrow">AGENTIC AI • MICROSOFT FABRIC • SNOWFLAKE</p>
+      <h1>Architecting the<br><span class="grad">Intelligent Enterprise</span></h1>
+      <p class="hero-sub">We design AI-native data platforms where autonomous agents, real-time analytics, and cloud intelligence converge — turning raw data into measurable business outcomes.</p>
+      <div class="hero-btns">
+        <a href="#" class="btn-primary">Explore Architectures ↗</a>
+        <a href="#" class="btn-secondary">Talk to an Expert</a>
+      </div>
+    </div>
+    <div class="hero-graphic">
+      <div class="flow-diagram">
+        <div class="flow-node ice-node">
+          <div class="icon">☁️</div>
+          <div class="label">INGEST</div>
+          <div class="title">Cloud Data Sources</div>
+        </div>
+        <div class="flow-connector"></div>
+        <div class="flow-node active">
+          <div class="icon">❄️</div>
+          <div class="label">UNIFY</div>
+          <div class="title">Snowflake / Fabric</div>
+        </div>
+        <div class="flow-connector"></div>
+        <div class="flow-node active">
+          <div class="icon">🧠</div>
+          <div class="label">REASON</div>
+          <div class="title">AI & LLM Layer</div>
+        </div>
+        <div class="flow-connector"></div>
+        <div class="flow-node active">
+          <div class="icon">🤖</div>
+          <div class="label">ACT</div>
+          <div class="title">Agentic Workflows</div>
+        </div>
+        <div class="flow-connector"></div>
+        <div class="flow-node ice-node">
+          <div class="icon">📈</div>
+          <div class="label">DELIVER</div>
+          <div class="title">Business Outcomes</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="trust">
-
-<div>Microsoft Fabric</div>
-<div>Snowflake</div>
-<div>Azure</div>
-<div>OpenAI</div>
-<div>AWS</div>
-<div>Databricks</div>
-
+<!-- METRICS -->
+<section class="metrics reveal">
+  <div class="metrics-inner">
+    <div>
+      <div class="metric-val">50+</div>
+      <div class="metric-label">Architectures Delivered</div>
+    </div>
+    <div>
+      <div class="metric-val">3</div>
+      <div class="metric-label">Continents Served</div>
+    </div>
+    <div>
+      <div class="metric-val">100%</div>
+      <div class="metric-label">Cloud Native</div>
+    </div>
+    <div>
+      <div class="metric-val">10x</div>
+      <div class="metric-label">Faster Insights</div>
+    </div>
+  </div>
 </section>
 
-<section class="vision">
-
-<h2>
-Most companies collect data.<br>
-Few create intelligence.
-</h2>
-
-<p>
-Decyra helps enterprises design systems that
-transform information into automated decisions,
-AI-powered insights and measurable outcomes.
-</p>
-
+<!-- TRUST -->
+<section class="trust reveal">
+  <div class="trust-inner">
+    <p class="trust-label">Certified expertise across leading platforms</p>
+    <div class="trust-logos">
+      <div class="trust-pill">❄️ Snowflake</div>
+      <div class="trust-pill">🔷 Microsoft Fabric</div>
+      <div class="trust-pill">☁️ Azure</div>
+      <div class="trust-pill">🤖 OpenAI</div>
+      <div class="trust-pill">⚡ AWS</div>
+      <div class="trust-pill">🧱 Databricks</div>
+      <div class="trust-pill">🔥 Apache Spark</div>
+    </div>
+  </div>
 </section>
 
-<section class="capabilities">
-
-<h2>Core Capabilities</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>Agentic AI</h3>
-<p>
-Multi-agent systems, enterprise copilots,
-AI orchestration and autonomous workflows.
-</p>
-</div>
-
-<div class="card">
-<h3>Microsoft Fabric</h3>
-<p>
-Lakehouse architecture, OneLake,
-real-time analytics and governance.
-</p>
-</div>
-
-<div class="card">
-<h3>Snowflake</h3>
-<p>
-Data cloud modernization,
-Snowpark and AI integration.
-</p>
-</div>
-
-<div class="card">
-<h3>Enterprise RAG</h3>
-<p>
-Knowledge platforms built using
-vector search and LLM architectures.
-</p>
-</div>
-
-</div>
-
+<!-- VISION -->
+<section class="vision reveal">
+  <div class="vision-inner">
+    <h2>Most companies collect data.<br><em>Few create intelligence.</em></h2>
+    <p>Decyra helps forward-thinking enterprises bridge that gap — designing systems that transform raw information into automated decisions, AI-powered insights, and measurable competitive advantage.</p>
+  </div>
 </section>
 
-<section class="qrynix">
-
-<div class="qrynix-content">
-
-<h2>Qrynix™</h2>
-
-<h3>
-The AI Analytics Operating System
-</h3>
-
-<p>
-Ask questions in natural language.
-Generate Spark SQL.
-Accelerate analytics delivery.
-Empower business users.
-</p>
-
-<a href="#" class="btn-primary">
-Explore Qrynix
-</a>
-
-</div>
-
+<!-- CAPABILITIES -->
+<section class="capabilities reveal">
+  <div class="section-header">
+    <div class="section-tag">What We Do</div>
+    <h2>Core Capabilities</h2>
+    <p>End-to-end expertise across the modern AI and data stack</p>
+  </div>
+  <div class="cap-grid">
+    <div class="cap-card">
+      <div class="cap-icon">🤖</div>
+      <h3>Agentic AI</h3>
+      <p>Multi-agent systems, enterprise copilots, AI orchestration frameworks, and autonomous workflows that act on your behalf — 24/7.</p>
+      <span class="cap-tag">LangGraph • AutoGen • CrewAI</span>
+    </div>
+    <div class="cap-card">
+      <div class="cap-icon">🔷</div>
+      <h3>Microsoft Fabric</h3>
+      <p>Lakehouse architecture, OneLake unification, real-time analytics pipelines, and enterprise governance at scale.</p>
+      <span class="cap-tag">OneLake • Real-Time Hub • Copilot</span>
+    </div>
+    <div class="cap-card">
+      <div class="cap-icon">❄️</div>
+      <h3>Snowflake</h3>
+      <p>Data cloud modernization, Snowpark ML, Cortex AI, and seamless integration with your existing analytics ecosystem.</p>
+      <span class="cap-tag">Cortex AI • Snowpark • Dynamic Tables</span>
+    </div>
+    <div class="cap-card">
+      <div class="cap-icon">📚</div>
+      <h3>Enterprise RAG</h3>
+      <p>Knowledge platforms built with vector search, hybrid retrieval, and LLM architectures that surface the right answer instantly.</p>
+      <span class="cap-tag">pgvector • Pinecone • Azure AI Search</span>
+    </div>
+    <div class="cap-card">
+      <div class="cap-icon">☁️</div>
+      <h3>Cloud Engineering</h3>
+      <p>Infrastructure-as-code, multi-cloud strategy, FinOps optimization and secure, scalable cloud-native architectures on Azure and AWS.</p>
+      <span class="cap-tag">Terraform • Bicep • CDK</span>
+    </div>
+    <div class="cap-card">
+      <div class="cap-icon">🔍</div>
+      <h3>Analytics Engineering</h3>
+      <p>dbt-powered transformation layers, semantic models, self-serve BI platforms, and data quality frameworks your business can trust.</p>
+      <span class="cap-tag">dbt • Power BI • Semantic Layer</span>
+    </div>
+  </div>
 </section>
 
-<section class="architectures">
-
-<h2>Reference Architectures</h2>
-
-<div class="grid">
-
-<div class="arch-card">
-Agentic AI Enterprise
-</div>
-
-<div class="arch-card">
-Enterprise RAG Platform
-</div>
-
-<div class="arch-card">
-Fabric Lakehouse
-</div>
-
-<div class="arch-card">
-Snowflake Data Cloud
-</div>
-
-<div class="arch-card">
-AI Control Tower
-</div>
-
-<div class="arch-card">
-Real-Time Analytics
-</div>
-
-</div>
-
+<!-- QRYNIX -->
+<section class="qrynix reveal">
+  <div class="qrynix-inner">
+    <div>
+      <div class="qrynix-badge">⚡ Product Spotlight</div>
+      <h2>Qrynix™</h2>
+      <h3>The AI Analytics Operating System for the Modern Enterprise</h3>
+      <ul class="qrynix-features">
+        <li>Ask questions in plain English — get production-ready Spark SQL</li>
+        <li>Accelerate analytics delivery from weeks to hours</li>
+        <li>Empowers business users to self-serve on complex data</li>
+        <li>Native integration with Snowflake and Microsoft Fabric</li>
+        <li>Enterprise-grade security and access control built-in</li>
+      </ul>
+      <a href="#" class="btn-primary">Explore Qrynix ↗</a>
+    </div>
+    <div class="qrynix-terminal">
+      <div class="terminal-bar">
+        <div class="terminal-dot t-red"></div>
+        <div class="terminal-dot t-yellow"></div>
+        <div class="terminal-dot t-green"></div>
+      </div>
+      <div class="terminal-line"><span class="t-comment">// Qrynix™ — Natural Language → SQL</span></div>
+      <br>
+      <div class="terminal-line"><span class="t-prompt">user@qrynix:~$</span> <span class="t-cmd">ask</span></div>
+      <div class="terminal-line" style="color:#E5E7EB;margin-left:1rem;">"Show me top 10 customers by revenue this quarter, broken down by region"</div>
+      <br>
+      <div class="terminal-line"><span class="t-output">✓ Generating optimized Spark SQL...</span></div>
+      <br>
+      <div class="terminal-line" style="color:#818CF8;">SELECT</div>
+      <div class="terminal-line" style="color:#E5E7EB;margin-left:1rem;">customer_name, region,</div>
+      <div class="terminal-line" style="color:#E5E7EB;margin-left:1rem;">SUM(revenue) AS total_revenue</div>
+      <div class="terminal-line" style="color:#818CF8;">FROM</div>
+      <div class="terminal-line" style="color:#E5E7EB;margin-left:1rem;">sales.transactions</div>
+      <div class="terminal-line" style="color:#818CF8;">WHERE</div>
+      <div class="terminal-line" style="color:#E5E7EB;margin-left:1rem;">quarter = CURRENT_QUARTER()</div>
+      <div class="terminal-line" style="color:#818CF8;">GROUP BY</div>
+      <div class="terminal-line" style="color:#E5E7EB;margin-left:1rem;">customer_name, region</div>
+      <div class="terminal-line" style="color:#818CF8;">ORDER BY</div>
+      <div class="terminal-line" style="color:#E5E7EB;margin-left:1rem;">total_revenue DESC LIMIT 10</div>
+      <br>
+      <div class="terminal-line"><span class="t-output">✓ Query ready — 0.3s</span> <span class="t-cursor"></span></div>
+    </div>
+  </div>
 </section>
 
-<section class="cta">
-
-<h2>
-Let's Design What Comes Next
-</h2>
-
-<p>
-The architecture decisions you make today
-will define your AI capabilities tomorrow.
-</p>
-
-<a href="#" class="btn-primary">
-Start the Conversation
-</a>
-
+<!-- ARCHITECTURES -->
+<section class="architectures reveal">
+  <div class="section-header">
+    <div class="section-tag">Reference Architectures</div>
+    <h2>Built for the Intelligent Enterprise</h2>
+    <p>Battle-tested blueprints you can deploy with confidence</p>
+  </div>
+  <div class="arch-grid">
+    <div class="arch-card">
+      <div class="arch-number">ARCHITECTURE 01</div>
+      <h3>Agentic AI Enterprise Platform</h3>
+      <p>Multi-agent orchestration with tool-calling, memory, and autonomous decision loops integrated into your core systems.</p>
+    </div>
+    <div class="arch-card">
+      <div class="arch-number">ARCHITECTURE 02</div>
+      <h3>Enterprise RAG Knowledge Platform</h3>
+      <p>Hybrid vector + keyword retrieval over structured and unstructured enterprise data, powered by leading LLMs.</p>
+    </div>
+    <div class="arch-card">
+      <div class="arch-number">ARCHITECTURE 03</div>
+      <h3>Fabric Lakehouse at Scale</h3>
+      <p>End-to-end Microsoft Fabric implementation with OneLake, medallion architecture, and governed semantic models.</p>
+    </div>
+    <div class="arch-card">
+      <div class="arch-number">ARCHITECTURE 04</div>
+      <h3>Snowflake Data Cloud Modernization</h3>
+      <p>Legacy warehouse migration to Snowflake with Cortex AI, Snowpark, and real-time data sharing capabilities.</p>
+    </div>
+    <div class="arch-card">
+      <div class="arch-number">ARCHITECTURE 05</div>
+      <h3>AI Control Tower</h3>
+      <p>Centralized observability, governance, and cost optimization for enterprise-wide AI agent deployments.</p>
+    </div>
+    <div class="arch-card">
+      <div class="arch-number">ARCHITECTURE 06</div>
+      <h3>Real-Time Analytics Engine</h3>
+      <p>Sub-second streaming pipelines with event-driven AI triggers, live dashboards, and operational intelligence.</p>
+    </div>
+  </div>
 </section>
 
+<!-- CLIENTS -->
+<section class="clients reveal">
+  <div class="clients-inner">
+    <div class="section-tag">Trusted By</div>
+    <h2 style="font-size:1.5rem;font-weight:700;margin-top:0.5rem;">Leading enterprises across industries</h2>
+    <div class="clients-grid">
+      <div class="client-pill">Financial Services</div>
+      <div class="client-pill">Healthcare</div>
+      <div class="client-pill">Retail & CPG</div>
+      <div class="client-pill">Manufacturing</div>
+      <div class="client-pill">Logistics</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta reveal">
+  <div class="cta-inner">
+    <h2>Let's Design What Comes Next</h2>
+    <p>The architecture decisions you make today define your AI capabilities for the next decade. Let's build them right — together.</p>
+    <div class="cta-buttons">
+      <a href="#" class="btn-primary">Start the Conversation ↗</a>
+      <a href="#" class="btn-secondary">View Case Studies</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-
-<h3>DECYRA</h3>
-
-<p>
-Enterprise AI • Microsoft Fabric • Snowflake
-</p>
-
-<p>
-© 2026 Decyra Technologies
-</p>
-
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">DECYRA</div>
+        <p>Architecting intelligent enterprises through Agentic AI, Microsoft Fabric, Snowflake, and cloud-native platforms that deliver real outcomes.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="#">Agentic AI</a>
+        <a href="#">Microsoft Fabric</a>
+        <a href="#">Snowflake</a>
+        <a href="#">Enterprise RAG</a>
+        <a href="#">Cloud Engineering</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Case Studies</a>
+        <a href="#">Architectures</a>
+        <a href="#">Qrynix™</a>
+        <a href="#">Careers</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="#">Contact Us</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">GitHub</a>
+        <a href="#">Blog</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Decyra Technologies. All rights reserved.</span>
+      <span>Enterprise AI • Microsoft Fabric • Snowflake</span>
+    </div>
+  </div>
 </footer>
 
+<script>
+// PARTICLE CANVAS
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [], mouse = {x:null,y:null};
+
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+resize();
+window.addEventListener('resize',resize);
+window.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
+
+class Particle{
+  constructor(){this.reset();}
+  reset(){
+    this.x=Math.random()*W;
+    this.y=Math.random()*H;
+    this.vx=(Math.random()-0.5)*0.4;
+    this.vy=(Math.random()-0.5)*0.4;
+    this.r=Math.random()*1.5+0.5;
+    this.color=Math.random()>0.5?'rgba(124,58,237,':'rgba(56,189,248,';
+    this.alpha=Math.random()*0.5+0.1;
+  }
+  update(){
+    this.x+=this.vx;this.y+=this.vy;
+    if(this.x<0||this.x>W||this.y<0||this.y>H)this.reset();
+    if(mouse.x){
+      let dx=this.x-mouse.x,dy=this.y-mouse.y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<100){this.x+=dx/d*0.8;this.y+=dy/d*0.8;}
+    }
+  }
+  draw(){
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+    ctx.fillStyle=this.color+this.alpha+')';
+    ctx.fill();
+  }
+}
+
+for(let i=0;i<120;i++)particles.push(new Particle());
+
+function connect(){
+  for(let i=0;i<particles.length;i++){
+    for(let j=i+1;j<particles.length;j++){
+      let dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y;
+      let d=Math.sqrt(dx*dx+dy*dy);
+      if(d<120){
+        ctx.beginPath();
+        ctx.strokeStyle=`rgba(124,58,237,${0.12*(1-d/120)})`;
+        ctx.lineWidth=0.5;
+        ctx.moveTo(particles[i].x,particles[i].y);
+        ctx.lineTo(particles[j].x,particles[j].y);
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function animate(){
+  ctx.clearRect(0,0,W,H);
+  particles.forEach(p=>{p.update();p.draw();});
+  connect();
+  requestAnimationFrame(animate);
+}
+animate();
+
+// SCROLL REVEAL
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.1});
+revealEls.forEach(el=>observer.observe(el));
+</script>
 </body>
 </html>
