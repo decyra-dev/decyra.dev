@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mukund Kumar Mishra | Principal Enterprise Data & AI Architect</title>
+<meta name="description" content="Principal Enterprise Data & AI Architect — Snowflake, Microsoft Fabric, Azure, Databricks, AI-Enabled Data Platforms.">
+<style>
+  :root{
+    --bg:#f8fafc; --bg2:#ffffff; --text:#0f172a; --text2:#475569; --muted:#64748b;
+    --border:#e2e8f0; --card:#ffffff; --accent:#7c3aed; --accent2:#4f46e5;
+    --accentSoft:#f3eefe; --pillBg:#f3eefe; --pillText:#7c3aed; --pillBorder:#e5d8fb;
+    --navBg:rgba(248,250,252,0.85);
+  }
+  [data-theme="dark"]{
+    --bg:#0a0a14; --bg2:#10101e; --text:#f1f5f9; --text2:#94a3b8; --muted:#64748b;
+    --border:rgba(255,255,255,0.1); --card:rgba(255,255,255,0.03); --accent:#a78bfa; --accent2:#818cf8;
+    --accentSoft:rgba(124,58,237,0.12); --pillBg:rgba(167,139,250,0.1); --pillText:#c4b5fd; --pillBorder:rgba(167,139,250,0.2);
+    --navBg:rgba(10,10,20,0.85);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg); color:var(--text); transition:background .3s,color .3s; line-height:1.5;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 20px;}
+  img{max-width:100%; display:block;}
+
+  /* ---- Background glow ---- */
+  .bg-glow{position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none;}
+  .bg-glow span{position:absolute; border-radius:50%; filter:blur(100px); opacity:.18;}
+  .bg-glow .g1{width:40vw; height:40vw; top:-10%; left:-10%; background:var(--accent);}
+  .bg-glow .g2{width:35vw; height:35vw; top:35%; right:-10%; background:var(--accent2);}
+
+  /* ---- Site Nav (multi-page) ---- */
+  nav.site-nav{
+    position:sticky; top:0; z-index:200; background:var(--navBg); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border); display:flex; flex-wrap:wrap; align-items:center;
+    gap:4px; padding:12px 20px;
+  }
+  nav.site-nav a{
+    padding:8px 14px; border-radius:8px; font-size:14px; font-weight:500; color:var(--text2);
+    transition:background .2s, color .2s;
+  }
+  nav.site-nav a:hover{ background:var(--accentSoft); color:var(--accent); }
+  nav.site-nav a.active{ color:var(--accent); background:var(--accentSoft); }
+
+  /* ---- Page header (within portfolio page) ---- */
+  header.page-header{
+    position:sticky; top:49px; z-index:150; transition:.3s;
+  }
+  header.page-header.scrolled{ background:var(--navBg); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
+  .header-inner{ display:flex; align-items:center; justify-content:space-between; height:64px; }
+  .brand{ display:flex; align-items:center; gap:10px; font-weight:700; font-size:17px; background:none; border:none; cursor:pointer; color:var(--text); }
+  .brand .av{ width:32px; height:32px; border-radius:8px; background:linear-gradient(135deg,var(--accent),var(--accent2)); display:flex; align-items:center; justify-content:center; color:#fff; font-size:13px; font-weight:700; }
+  .section-nav{ display:flex; gap:2px; overflow-x:auto; }
+  .section-nav button{ background:none; border:none; padding:8px 12px; border-radius:8px; font-size:13.5px; font-weight:500; color:var(--text2); cursor:pointer; white-space:nowrap; }
+  .section-nav button:hover{ color:var(--text); background:var(--accentSoft); }
+  .section-nav button.active{ color:var(--accent); }
+  .icon-btn{ background:none; border:1px solid var(--border); border-radius:8px; padding:8px; cursor:pointer; color:var(--text); display:flex; align-items:center; justify-content:center; }
+  .icon-btn:hover{ background:var(--accentSoft); }
+  .mobile-toggle{ display:none; }
+
+  @media (max-width: 980px){
+    .section-nav{ display:none; }
+    .mobile-toggle{ display:flex; }
+  }
+  .mobile-menu{ display:none; flex-direction:column; gap:2px; padding:10px 20px 16px; border-bottom:1px solid var(--border); background:var(--bg); }
+  .mobile-menu.open{ display:flex; }
+  .mobile-menu button{ text-align:left; background:none; border:none; padding:10px 8px; border-radius:8px; font-size:14px; font-weight:500; color:var(--text); cursor:pointer; }
+  .mobile-menu button:hover{ background:var(--accentSoft); }
+
+  /* ---- Generic ---- */
+  section{ padding:80px 0; }
+  .eyebrow{ display:flex; align-items:center; gap:8px; font-size:12px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:var(--accent); margin-bottom:12px; }
+  .eyebrow::before{ content:""; width:24px; height:1px; background:var(--accent); }
+  h2.title{ font-size:34px; font-weight:700; letter-spacing:-0.02em; max-width:760px; }
+  p.sub{ margin-top:14px; color:var(--text2); font-size:17px; max-width:680px; }
+  .section-head{ margin-bottom:48px; }
+
+  .pill{ display:inline-block; padding:5px 12px; border-radius:999px; font-size:12px; font-weight:600; background:var(--pillBg); color:var(--pillText); border:1px solid var(--pillBorder); }
+
+  .card{
+    border:1px solid var(--border); background:var(--card); border-radius:18px; transition:.25s;
+  }
+  .card:hover{ transform:translateY(-3px); border-color:var(--accent); box-shadow:0 12px 30px -10px rgba(124,58,237,.25); }
+
+  /* ---- Hero ---- */
+  .hero{ padding:88px 0 70px; }
+  .hero-grid{ display:grid; grid-template-columns:1.2fr .8fr; gap:48px; align-items:center; }
+  @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; } }
+  .badge{ display:inline-flex; align-items:center; gap:8px; padding:7px 16px; border-radius:999px; border:1px solid var(--pillBorder); background:var(--pillBg); color:var(--pillText); font-size:14px; font-weight:600; margin-bottom:22px; }
+  .hero h1{ font-size:48px; line-height:1.12; font-weight:800; letter-spacing:-0.02em; }
+  .hero h1 .grad{ background:linear-gradient(90deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .hero p.lead{ margin-top:20px; font-size:18px; color:var(--text2); max-width:560px; }
+  .hero p.tagline{ margin-top:8px; font-size:14px; color:var(--muted); }
+  .hero-cta{ display:flex; gap:12px; margin-top:28px; flex-wrap:wrap; }
+  .btn{ display:inline-flex; align-items:center; gap:8px; padding:13px 24px; border-radius:12px; font-weight:600; font-size:14.5px; cursor:pointer; border:none; }
+  .btn-primary{ background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#fff; box-shadow:0 10px 25px -8px rgba(124,58,237,.5); }
+  .btn-secondary{ background:none; border:1px solid var(--border); color:var(--text); }
+  .btn-secondary:hover{ background:var(--accentSoft); }
+  .stat-row{ display:flex; gap:32px; margin-top:36px; flex-wrap:wrap; }
+  .stat-row .num{ font-size:19px; font-weight:700; color:var(--accent); }
+  .stat-row .lbl{ font-size:12px; color:var(--muted); margin-top:2px; }
+  .hero-visual{ position:relative; }
+  .hero-square{ aspect-ratio:1/1; border-radius:26px; background:linear-gradient(135deg,var(--accentSoft),rgba(79,70,229,.12)); border:1px solid var(--pillBorder); display:flex; align-items:center; justify-content:center; }
+  .hero-square .inner{ width:78%; height:78%; border-radius:20px; background:linear-gradient(135deg,var(--accent),var(--accent2)); display:flex; align-items:center; justify-content:center; color:#fff; font-size:64px; font-weight:800; box-shadow:0 25px 50px -12px rgba(0,0,0,.3); }
+  .hero-badge-card{ position:absolute; bottom:-18px; left:-18px; background:var(--bg2); border:1px solid var(--border); border-radius:14px; padding:14px 16px; box-shadow:0 15px 30px -10px rgba(0,0,0,.2); display:flex; align-items:center; gap:10px; }
+  .hero-badge-card strong{ display:block; font-size:13.5px; }
+  .hero-badge-card span{ font-size:11.5px; color:var(--muted); }
+
+  /* ---- Search ---- */
+  .search-wrap{ max-width:640px; margin:-12px auto 50px; position:relative; }
+  .search-input{ width:100%; padding:13px 16px 13px 44px; border-radius:12px; border:1px solid var(--border); background:var(--card); color:var(--text); font-size:14px; }
+  .search-input:focus{ outline:2px solid var(--accent); }
+  .search-icon{ position:absolute; left:14px; top:13px; color:var(--muted); }
+  .search-results{ margin-top:8px; border:1px solid var(--border); border-radius:12px; background:var(--bg2); overflow:hidden; box-shadow:0 15px 30px -10px rgba(0,0,0,.15); }
+  .search-results .row{ padding:12px 16px; font-size:14px; display:flex; justify-content:space-between; border-bottom:1px solid var(--border); }
+  .search-results .row:last-child{ border-bottom:none; }
+  .search-empty{ padding:14px 16px; font-size:14px; color:var(--muted); }
+
+  /* ---- Grids ---- */
+  .grid{ display:grid; gap:20px; }
+  .grid-2{ grid-template-columns:1fr 1fr; }
+  .grid-3{ grid-template-columns:1fr 1fr 1fr; }
+  @media (max-width:900px){ .grid-2,.grid-3{ grid-template-columns:1fr; } }
+  @media (min-width:601px) and (max-width:900px){ .grid-3{ grid-template-columns:1fr 1fr; } }
+
+  .icon-tile{ width:42px; height:42px; border-radius:10px; background:var(--accentSoft); display:flex; align-items:center; justify-content:center; color:var(--accent); margin-bottom:14px; font-size:20px; }
+  .tag-chip{ font-size:12px; padding:5px 10px; border-radius:6px; background:var(--accentSoft); color:var(--text2); display:inline-block; margin:3px 4px 0 0; }
+
+  /* About */
+  .about-grid{ display:grid; grid-template-columns:2fr 1fr; gap:24px; }
+  @media (max-width:900px){ .about-grid{ grid-template-columns:1fr; } }
+  .about-grid .card{ padding:28px; }
+  .about-grid p{ color:var(--text2); margin-bottom:14px; }
+  .lead-list{ list-style:none; font-size:14px; color:var(--text2); }
+  .lead-list li{ display:flex; gap:8px; margin-bottom:12px; }
+  .lead-list .star{ color:var(--accent); flex-shrink:0; margin-top:2px; }
+
+  /* Timeline */
+  .timeline{ position:relative; padding-left:32px; border-left:2px solid var(--pillBorder); }
+  .tl-item{ position:relative; margin-bottom:36px; }
+  .tl-item:last-child{ margin-bottom:0; }
+  .tl-dot{ position:absolute; left:-41px; top:6px; width:16px; height:16px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px var(--accentSoft); }
+  .tl-item .card{ padding:24px; }
+  .tl-period{ font-size:12px; color:var(--muted); display:flex; gap:6px; align-items:center; margin-bottom:8px; }
+  .tl-role{ font-size:17px; font-weight:700; margin-bottom:4px; }
+  .tl-company{ font-size:14px; font-weight:600; color:var(--accent); margin-bottom:10px; }
+  .tl-desc{ font-size:14.5px; color:var(--text2); margin-bottom:10px; }
+
+  /* Skills */
+  .skill-card{ padding:24px; }
+  .skill-card h3{ font-size:16px; font-weight:700; margin-bottom:12px; }
+  .cert-chip{ display:inline-flex; align-items:center; gap:8px; padding:9px 16px; border-radius:12px; border:1px solid var(--border); background:var(--card); font-size:13.5px; margin:4px 6px 0 0; }
+
+  /* Projects */
+  .filter-row{ display:flex; gap:8px; margin-bottom:30px; flex-wrap:wrap; }
+  .filter-btn{ padding:8px 16px; border-radius:999px; font-size:13.5px; font-weight:600; border:1px solid var(--border); background:none; color:var(--text2); cursor:pointer; }
+  .filter-btn.active{ background:var(--accent); color:#fff; border-color:var(--accent); }
+  .proj-card{ padding:26px; }
+  .proj-card h3{ font-size:18px; margin:12px 0 8px; }
+  .proj-card p{ color:var(--text2); font-size:14.5px; margin-bottom:14px; }
+  .proj-outcome{ font-size:14px; font-weight:600; color:var(--accent); display:flex; align-items:center; gap:8px; margin-top:10px; }
+
+  /* Architecture */
+  .arch-card{ padding:24px; display:flex; gap:16px; }
+  .arch-icon{ width:56px; height:56px; border-radius:12px; background:linear-gradient(135deg,var(--accentSoft),rgba(79,70,229,.15)); display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:24px; flex-shrink:0; }
+  .arch-card h3{ font-size:15.5px; margin-bottom:6px; }
+  .arch-card p{ font-size:14px; color:var(--text2); }
+
+  /* Publications */
+  .pub-card{ padding:18px; display:flex; gap:12px; align-items:flex-start; }
+  .pub-card h4{ font-size:14px; margin-bottom:4px; }
+  .pub-card span{ font-size:12.5px; color:var(--muted); }
+
+  /* Speaking */
+  .speak-card{ padding:24px; }
+  .speak-card h3{ font-size:16px; margin:10px 0 4px; }
+  .speak-card p{ font-size:13.5px; color:var(--muted); }
+  .yt-card{ padding:22px; display:flex; gap:16px; align-items:center; }
+  .yt-card h3{ font-size:16px; margin-bottom:4px; }
+  .yt-card p{ font-size:13.5px; color:var(--text2); }
+
+  /* Gallery */
+  .gal-tile{ aspect-ratio:1/1; border-radius:16px; background:linear-gradient(135deg,var(--accentSoft),rgba(79,70,229,.12)); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; text-align:center; padding:16px; font-size:14px; color:var(--text2); transition:.2s; }
+  .gal-tile:hover{ transform:scale(1.02); }
+
+  /* Contact */
+  .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  @media (max-width:900px){ .contact-grid{ grid-template-columns:1fr; } }
+  .form-card{ padding:30px; }
+  .form-input, .form-textarea{ width:100%; padding:13px 16px; border-radius:12px; border:1px solid var(--border); background:transparent; color:var(--text); font-size:14px; margin-bottom:14px; font-family:inherit; }
+  .form-input:focus, .form-textarea:focus{ outline:2px solid var(--accent); }
+  .submit-btn{ width:100%; padding:13px; border-radius:12px; border:none; background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#fff; font-weight:600; font-size:14.5px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; }
+  .success-box{ text-align:center; padding:40px 0; }
+  .contact-detail{ display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text2); margin-bottom:10px; }
+  .contact-detail:hover{ color:var(--accent); }
+  .social-row{ display:flex; gap:10px; margin-top:18px; }
+  .social-row a{ width:40px; height:40px; border-radius:10px; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; }
+  .social-row a:hover{ border-color:var(--accent); color:var(--accent); }
+  .news-row{ display:flex; gap:8px; margin-top:14px; }
+  .news-row input{ flex:1; padding:11px 14px; border-radius:10px; border:1px solid var(--border); background:transparent; color:var(--text); font-size:13.5px; }
+  .news-row button{ padding:11px 18px; border-radius:10px; border:none; background:var(--accent); color:#fff; font-weight:600; font-size:13.5px; cursor:pointer; }
+  .availability{ display:flex; align-items:center; gap:10px; padding:20px; font-size:14px; color:var(--text2); }
+
+  footer{ border-top:1px solid var(--border); padding:36px 0; text-align:center; font-size:13.5px; color:var(--muted); }
+
+  /* spacing helpers */
+  .mt-10{margin-top:40px;}
+  .mb-4{margin-bottom:16px;}
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="bg-glow"><span class="g1"></span><span class="g2"></span></div>
+
+<!-- ===== SITE-WIDE NAVIGATION (multi-page) ===== -->
+<nav class="site-nav">
+  <a href="index.html" class="active">Home</a>
+  <a href="services.html">Services</a>
+  <a href="portfolio.html">Portfolio</a>
+  <a href="architectures.html">Architectures</a>
+  <a href="use-cases.html">Use Cases</a>
+  <a href="qrynix.html">Qrynix</a>
+  <a href="case-studies.html">Case Studies</a>
+  <a href="about.html">About</a>
+  <a href="insights.html">Insights</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<!-- ===== PAGE HEADER (in-page section nav) ===== -->
+<header class="page-header" id="pageHeader">
+  <div class="wrap header-inner">
+    <button class="brand" onclick="scrollToSection('home')">
+      <span class="av">MM</span>
+      <span>Mukund Kumar Mishra</span>
+    </button>
+    <nav class="section-nav" id="sectionNav">
+      <button data-target="home" class="active">Home</button>
+      <button data-target="about">About</button>
+      <button data-target="experience">Experience</button>
+      <button data-target="skills">Skills</button>
+      <button data-target="projects">Projects</button>
+      <button data-target="architecture">Architecture</button>
+      <button data-target="publications">Publications</button>
+      <button data-target="speaking">Speaking</button>
+      <button data-target="gallery">Gallery</button>
+      <button data-target="contact">Contact</button>
+    </nav>
+    <div style="display:flex; gap:8px; align-items:center;">
+      <button class="icon-btn" id="themeToggle" title="Toggle theme">🌙</button>
+      <button class="icon-btn mobile-toggle" id="mobileToggle" title="Menu">☰</button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <button data-target="home">Home</button>
+    <button data-target="about">About</button>
+    <button data-target="experience">Experience</button>
+    <button data-target="skills">Skills</button>
+    <button data-target="projects">Projects</button>
+    <button data-target="architecture">Architecture</button>
+    <button data-target="publications">Publications</button>
+    <button data-target="speaking">Speaking</button>
+    <button data-target="gallery">Gallery</button>
+    <button data-target="contact">Contact</button>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="badge">✨ Principal Enterprise Data & AI Architect</div>
+      <h1>Architecting <span class="grad">Enterprise Data &amp; AI</span> at Scale</h1>
+      <p class="lead">18+ years delivering enterprise-scale cloud data modernization, lakehouse transformation, and AI-enabled platform solutions across BFSI, Payments, Manufacturing, and Government sectors.</p>
+      <p class="tagline">Snowflake · Microsoft Fabric · Azure · Databricks · AI-Enabled Data Platforms</p>
+      <div class="hero-cta">
+        <button class="btn btn-primary" onclick="scrollToSection('projects')">View My Work →</button>
+        <button class="btn btn-secondary" onclick="scrollToSection('contact')">⭳ Download Resume</button>
+      </div>
+      <div class="stat-row">
+        <div><div class="num">18+</div><div class="lbl">Years Experience</div></div>
+        <div><div class="num">6</div><div class="lbl">Enterprise Engagements</div></div>
+        <div><div class="num">BFSI · Govt · Manufacturing</div><div class="lbl">Sectors Served</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-square"><div class="inner">MM</div></div>
+      <div class="hero-badge-card">✅<div><strong>Azure Solutions Architect</strong><span>Microsoft Certified</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEARCH ===== -->
+<div class="wrap search-wrap">
+  <span class="search-icon">🔍</span>
+  <input class="search-input" id="searchInput" placeholder="Search projects, publications, experience...">
+  <div id="searchResults"></div>
+</div>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">About Me</div>
+      <h2 class="title">Professional Summary</h2>
+    </div>
+    <div class="about-grid">
+      <div class="card">
+        <p>Principal Enterprise Data &amp; AI Architect with 18+ years of experience delivering enterprise-scale cloud data modernization, lakehouse transformation, analytics engineering, and AI-enabled platform solutions across BFSI, Payments, Manufacturing, and Government sectors. Expertise in architecting modern enterprise data ecosystems using Snowflake, Microsoft Fabric, Azure, AWS, Databricks, Python, PySpark, Azure Data Factory, and distributed data platforms.</p>
+        <p>Proven track record leading enterprise architecture initiatives focused on cloud migration, data warehouse modernization, governance, compliance, semantic modeling, and CXO-level strategic technology roadmaps. Hands-on expertise designing AI-enabled enterprise platforms leveraging RAG, vector databases, LLM integrations, and multi-agent orchestration supporting contextual analytics and intelligent business workflows.</p>
+      </div>
+      <div class="card" style="padding:24px;">
+        <h3 style="font-size:16px; margin-bottom:14px;">🏆 Thought Leadership</h3>
+        <ul class="lead-list">
+          <li><span class="star">★</span>Speaker — NASSCOM Webinar on Snowflake &amp; Enterprise Analytics</li>
+          <li><span class="star">★</span>Technical Reviewer — Practical Apache Spark Using Scala API</li>
+          <li><span class="star">★</span>Course Author — Generative AI for Developers (Udemy)</li>
+          <li><span class="star">★</span>Recognized — Google / Infosys Reimagine 2023 Hackathon</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE ===== -->
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Career Journey</div>
+      <h2 class="title">Professional Experience</h2>
+    </div>
+    <div class="timeline" id="timeline"></div>
+  </div>
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Expertise</div>
+      <h2 class="title">Core Competencies</h2>
+    </div>
+    <div class="grid grid-3" id="skillsGrid"></div>
+    <div class="mt-10">
+      <h3 style="font-size:16px; margin-bottom:14px;">🏅 Certifications</h3>
+      <div id="certRow"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Portfolio</div>
+      <h2 class="title">Projects &amp; Case Studies</h2>
+      <p class="sub">Enterprise engagements spanning lakehouse modernization, AI platforms, and large-scale compliance analytics.</p>
+    </div>
+    <div class="filter-row" id="filterRow"></div>
+    <div class="grid grid-2" id="projectsGrid"></div>
+  </div>
+</section>
+
+<!-- ===== ARCHITECTURE ===== -->
+<section id="architecture">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Technical Deep Dive</div>
+      <h2 class="title">AI &amp; Data Architecture Patterns</h2>
+    </div>
+    <div class="grid grid-2" id="archGrid"></div>
+  </div>
+</section>
+
+<!-- ===== PUBLICATIONS ===== -->
+<section id="publications">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Knowledge Sharing</div>
+      <h2 class="title">Publications, Courses &amp; Content</h2>
+    </div>
+    <div class="grid grid-2" id="pubGrid"></div>
+  </div>
+</section>
+
+<!-- ===== SPEAKING ===== -->
+<section id="speaking">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Engagements</div>
+      <h2 class="title">Speaking &amp; Recognition</h2>
+    </div>
+    <div class="grid grid-2 mb-4" id="speakGrid"></div>
+    <div class="card yt-card">
+      <div style="font-size:28px;">▶️</div>
+      <div>
+        <h3>TechMindByMukundKumar</h3>
+        <p>YouTube channel — technical content on AI, Data &amp; Cloud. Embed your latest video here once you share the link.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section id="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Moments</div>
+      <h2 class="title">Photo Gallery</h2>
+      <p class="sub">Photo gallery placeholder — replace with real event, speaking, and workshop photographs.</p>
+    </div>
+    <div class="grid grid-3" id="galleryGrid"></div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Get In Touch</div>
+      <h2 class="title">Let's Build Something Together</h2>
+      <p class="sub">Open to enterprise architecture consulting, speaking engagements, and advisory roles.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="card form-card" id="formCard">
+        <input class="form-input" placeholder="Your Name">
+        <input class="form-input" type="email" placeholder="Your Email">
+        <input class="form-input" placeholder="Subject">
+        <textarea class="form-textarea" rows="4" placeholder="Message"></textarea>
+        <button class="submit-btn" onclick="sendForm()">✉ Send Message</button>
+      </div>
+      <div>
+        <div class="card" style="padding:24px; margin-bottom:20px;">
+          <h3 style="font-size:16px; margin-bottom:14px;">Contact Details</h3>
+          <a class="contact-detail" href="mailto:thisismukund@gmail.com">📧 thisismukund@gmail.com</a>
+          <div class="contact-detail">📱 +91 9765902645</div>
+          <a class="contact-detail" href="https://www.linkedin.com/in/mukundkumarmishra/" target="_blank">🔗 linkedin.com/in/mukundkumarmishra</a>
+          <div class="social-row">
+            <a href="https://www.linkedin.com/in/mukundkumarmishra/" target="_blank">in</a>
+            <a href="#" target="_blank">YT</a>
+            <a href="#" target="_blank">GH</a>
+            <a href="#" target="_blank">M</a>
+          </div>
+        </div>
+        <div class="card" style="padding:24px; margin-bottom:20px;">
+          <h3 style="font-size:16px; margin-bottom:8px;">📧 Newsletter</h3>
+          <p style="font-size:13.5px; color:var(--text2);">Get insights on Enterprise AI, Microsoft Fabric, and Cloud Data Architecture.</p>
+          <div class="news-row"><input placeholder="you@email.com"><button>Subscribe</button></div>
+        </div>
+        <div class="card availability">📍 Available for enterprise architecture consulting &amp; advisory engagements</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© <span id="year"></span> Mukund Kumar Mishra — Principal Enterprise Data &amp; AI Architect.</footer>
+
+<script>
+/* ---------------- DATA ---------------- */
+const EXPERIENCE = [
+  { role:"Microsoft Fabric | Data & AI Architecture", company:"Freelance / Independent Consultant", period:"Apr 2026 — Present",
+    desc:"Designing a Microsoft Fabric-based lakehouse architecture on OneLake, building end-to-end medallion (Bronze/Silver/Gold) pipelines, modernizing legacy warehouse workloads into Fabric-native components, and preparing AI-ready data architecture for RAG-based enterprise use cases.",
+    tags:["Microsoft Fabric","OneLake","Delta Lake","Power BI","PySpark"] },
+  { role:"Principal Architect – Data & Cloud", company:"Infosys Limited", period:"Oct 2020 — Mar 2026",
+    desc:"Led enterprise architecture for Snowflake and Microsoft Fabric lakehouse modernization across BFSI clients. Drove DW-to-lakehouse transformation, defined governance frameworks and cloud adoption strategy, ran CXO-level architecture workshops, and enabled enterprise AI integration using RAG, vector databases, and LLM orchestration.",
+    tags:["Snowflake","Microsoft Fabric","Azure","AWS","Databricks","Azure OpenAI"] },
+  { role:"Senior Architect – Azure & Snowflake", company:"Bizmetric · Client: Murphy Oil", period:"Sep 2019 — Aug 2020",
+    desc:"Led architecture and implementation strategy for enterprise analytics modernization using Snowflake on Azure, designing scalable reporting platforms and governed analytics solutions, with ETL/ELT integration frameworks built on Azure Data Factory.",
+    tags:["Snowflake","Azure","ADF","Databricks"] },
+  { role:"Solution Architect – Data Platforms", company:"TSYS", period:"Jan 2018 — Aug 2019",
+    desc:"Architected enterprise data lake and analytics platforms for mission-critical payment processing and compliance-driven reporting, using PySpark and Hadoop ecosystem technologies for distributed processing.",
+    tags:["PySpark","Hadoop","Hive","Data Lake"] },
+  { role:"Technical Architect", company:"Larsen & Toubro Infotech (LTI) · Clients: Liberty Life, CBDT (Govt. of India)", period:"Aug 2015 — Dec 2017",
+    desc:"Designed enterprise-scale analytics platforms for insurance and government transformation programs, including contributing to Project Insight — a national-scale tax intelligence and compliance analytics initiative for CBDT.",
+    tags:["Spark","Hadoop","Hive","Enterprise Analytics"] },
+  { role:"Solution Architect – BI COE", company:"Zensar Technologies", period:"Feb 2008 — Aug 2015",
+    desc:"Led enterprise BI, analytics, and data warehousing initiatives across multiple clients, delivering scalable reporting platforms and contributing to analytics modernization and standardization programs.",
+    tags:["Data Warehousing","ETL","Tableau","Power BI"] },
+];
+
+const SKILLS = [
+  { cat:"Enterprise Architecture", icon:"✨", items:["Enterprise Data Architecture","Lakehouse Architecture","DW Modernization","Cloud Migration Strategy","Governance & Compliance","Semantic Modeling"] },
+  { cat:"Cloud & Data Platforms", icon:"☁️", items:["Snowflake","Microsoft Fabric (OneLake)","Azure","AWS","Databricks","Delta Lake","Azure Data Factory"] },
+  { cat:"Data Engineering & Processing", icon:"💻", items:["Python","PySpark","Hadoop Ecosystem","Hive","ETL / ELT","Distributed Processing","Analytics Engineering"] },
+  { cat:"AI-Enabled Platforms", icon:"🧠", items:["RAG Architecture","LangChain","LangGraph","CrewAI","Azure OpenAI","GPT Models","ChromaDB","AI Agent Workflows"] },
+  { cat:"Analytics & Visualization", icon:"📊", items:["Power BI","Tableau","Enterprise Reporting","Dashboarding","Self-Service Analytics"] },
+];
+
+const CERTS = ["Microsoft Certified: Azure Solutions Architect","Certified Scrum Master (CSM)","Certified Scrum Product Owner (CSPO)","SAFe PO/PM"];
+
+const PROJECTS = [
+  { title:"AI-Driven Commerce Assistant (POC)", tag:"AI-Enabled Platforms",
+    summary:"An AI-enabled commerce assistant using multi-agent orchestration for intelligent product discovery and workflow automation, with a RAG architecture grounded on a Chroma vector database.",
+    stack:["LangChain","LangGraph","CrewAI","ChromaDB","Azure OpenAI"],
+    outcome:"Demonstrated governed enterprise data access combined with LLM-powered contextual workflows" },
+  { title:"Microsoft Fabric Lakehouse Modernization", tag:"Lakehouse & Cloud",
+    summary:"End-to-end medallion architecture (Bronze/Silver/Gold) on Microsoft Fabric OneLake, migrating legacy warehouse workloads into Fabric-native Data Factory, Notebooks, Lakehouse and Warehouse components.",
+    stack:["Microsoft Fabric","OneLake","Delta Lake","Power BI","PySpark"],
+    outcome:"Unified data storage and analytics consumption with governed, semantic-modeled reporting" },
+  { title:"Enterprise Snowflake & Fabric Transformation (BFSI)", tag:"Lakehouse & Cloud",
+    summary:"Architecture leadership for Snowflake and Microsoft Fabric-based lakehouse modernization and analytics transformation across BFSI clients at Infosys, including DW-to-lakehouse migration and governance frameworks.",
+    stack:["Snowflake","Microsoft Fabric","Azure","AWS","Databricks"],
+    outcome:"CXO-aligned modernization roadmap with enterprise AI integration patterns" },
+  { title:"Project Insight — National Tax Intelligence Platform", tag:"Government & Compliance",
+    summary:"Contributed to the architecture of Project Insight, a national-scale analytics initiative for CBDT (Government of India), supporting tax intelligence and compliance analytics using distributed Spark/Hadoop processing.",
+    stack:["Spark","Hadoop","Hive","Enterprise Reporting"],
+    outcome:"Scalable analytics framework supporting national compliance-driven governance" },
+  { title:"Enterprise Analytics Modernization — Murphy Oil", tag:"Lakehouse & Cloud",
+    summary:"Designed scalable, cloud-native analytics and reporting platforms on Snowflake and Azure for enterprise business intelligence and modernization objectives.",
+    stack:["Snowflake","Azure","Azure Data Factory"],
+    outcome:"Secure, governed analytics aligned to enterprise BI strategy" },
+  { title:"Payments Data Lake & Compliance Reporting", tag:"Data Engineering",
+    summary:"Distributed data processing solution for mission-critical payment processing workloads at TSYS, enabling modernized operational and regulatory reporting.",
+    stack:["PySpark","Hadoop","Hive"],
+    outcome:"High-performance architecture supporting operational and regulatory reporting at scale" },
+];
+
+const ARCHITECTURES = [
+  { title:"Microsoft Fabric Medallion Architecture", desc:"Bronze/Silver/Gold OneLake lakehouse design pattern with semantic modeling and governed Power BI consumption." },
+  { title:"Enterprise RAG & Agentic Reference Pattern", desc:"Retrieval-Augmented Generation architecture using vector databases (ChromaDB), LangChain/LangGraph orchestration, and CrewAI multi-agent workflows." },
+  { title:"Snowflake + Azure Lakehouse Modernization", desc:"Cloud-native warehouse-to-lakehouse migration pattern combining Snowflake, ADF, and Databricks for enterprise analytics." },
+  { title:"Distributed Compliance Analytics Platform", desc:"Spark/Hadoop-based data lake architecture supporting national-scale, compliance-driven analytics workloads." },
+];
+
+const PUBLICATIONS = [
+  { title:"Generative AI for Developers: Practical Implementation", type:"Course Author", venue:"Udemy" },
+  { title:"Practical Apache Spark Using Scala API", type:"Technical Reviewer", venue:"Published Book" },
+  { title:"Articles on AI, Big Data, Cloud Computing & Enterprise Analytics", type:"Published Articles", venue:"Various technical platforms" },
+  { title:"TechMindByMukundKumar", type:"YouTube Channel", venue:"Technical content on AI, Data & Cloud" },
+];
+
+const SPEAKING = [
+  { title:"Snowflake & Enterprise Analytics", event:"NASSCOM Webinar", type:"Webinar" },
+  { title:"Google / Infosys Reimagine 2023 Hackathon", event:"Recognized Participant", type:"Recognition" },
+];
+
+const GALLERY = ["NASSCOM Webinar Session","Infosys Reimagine Hackathon","Architecture Workshop","Client Engagement","Team Mentoring","Conference Networking"];
+
+/* ---------------- RENDER ---------------- */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+document.getElementById('timeline').innerHTML = EXPERIENCE.map(e => `
+  <div class="tl-item">
+    <div class="tl-dot"></div>
+    <div class="card">
+      <div class="tl-period">📅 ${e.period}</div>
+      <div class="tl-role">${e.role}</div>
+      <div class="tl-company">💼 ${e.company}</div>
+      <div class="tl-desc">${e.desc}</div>
+      <div>${e.tags.map(t=>`<span class="tag-chip">${t}</span>`).join('')}</div>
+    </div>
+  </div>
+`).join('');
+
+document.getElementById('skillsGrid').innerHTML = SKILLS.map(s => `
+  <div class="card skill-card">
+    <div class="icon-tile">${s.icon}</div>
+    <h3>${s.cat}</h3>
+    <div>${s.items.map(i=>`<span class="pill" style="margin:3px 4px 0 0; display:inline-block;">${i}</span>`).join('')}</div>
+  </div>
+`).join('');
+
+document.getElementById('certRow').innerHTML = CERTS.map(c => `<span class="cert-chip">✅ ${c}</span>`).join('');
+
+function renderProjects(filter){
+  const list = filter === 'All' ? PROJECTS : PROJECTS.filter(p=>p.tag===filter);
+  document.getElementById('projectsGrid').innerHTML = list.map(p => `
+    <div class="card proj-card">
+      <span class="pill">${p.tag}</span>
+      <h3>${p.title}</h3>
+      <p>${p.summary}</p>
+      <div>${p.stack.map(s=>`<span class="tag-chip">${s}</span>`).join('')}</div>
+      <div class="proj-outcome">✅ ${p.outcome}</div>
+    </div>
+  `).join('');
+}
+const tags = ['All', ...new Set(PROJECTS.map(p=>p.tag))];
+document.getElementById('filterRow').innerHTML = tags.map((t,i)=>`<button class="filter-btn ${i===0?'active':''}" data-tag="${t}">${t}</button>`).join('');
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderProjects(btn.dataset.tag);
+  });
+});
+renderProjects('All');
+
+document.getElementById('archGrid').innerHTML = ARCHITECTURES.map(a => `
+  <div class="card arch-card">
+    <div class="arch-icon">🗄️</div>
+    <div><h3>${a.title}</h3><p>${a.desc}</p></div>
+  </div>
+`).join('');
+
+document.getElementById('pubGrid').innerHTML = PUBLICATIONS.map(p => `
+  <div class="card pub-card">
+    <div style="font-size:18px;">📘</div>
+    <div><h4>${p.title}</h4><span>${p.type} · ${p.venue}</span></div>
+  </div>
+`).join('');
+
+document.getElementById('speakGrid').innerHTML = SPEAKING.map(s => `
+  <div class="card speak-card">
+    <div style="font-size:20px;">🎙️</div>
+    <span class="pill">${s.type}</span>
+    <h3>${s.title}</h3>
+    <p>${s.event}</p>
+  </div>
+`).join('');
+
+document.getElementById('galleryGrid').innerHTML = GALLERY.map(g => `<div class="gal-tile">${g}</div>`).join('');
+
+/* ---------------- SEARCH ---------------- */
+const searchable = [
+  ...PROJECTS.map(p=>({title:p.title, type:'Project'})),
+  ...PUBLICATIONS.map(p=>({title:p.title, type:'Publication'})),
+  ...EXPERIENCE.map(e=>({title:e.role+' — '+e.company, type:'Experience'})),
+];
+document.getElementById('searchInput').addEventListener('input', (e)=>{
+  const q = e.target.value.trim().toLowerCase();
+  const box = document.getElementById('searchResults');
+  if(!q){ box.innerHTML=''; return; }
+  const results = searchable.filter(i=>i.title.toLowerCase().includes(q));
+  box.innerHTML = `<div class="search-results">${
+    results.length ? results.map(r=>`<div class="row"><span>${r.title}</span><span class="pill">${r.type}</span></div>`).join('')
+    : `<div class="search-empty">No results found.</div>`
+  }</div>`;
+});
+
+/* ---------------- THEME ---------------- */
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', ()=>{
+  const body = document.body;
+  const isDark = body.getAttribute('data-theme') === 'dark';
+  body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  themeToggle.textContent = isDark ? '☀️' : '🌙';
+});
+
+/* ---------------- NAV SCROLL / ACTIVE STATE ---------------- */
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+document.querySelectorAll('.section-nav button, .mobile-menu button').forEach(btn=>{
+  btn.addEventListener('click', ()=> scrollToSection(btn.dataset.target));
+});
+
+const header = document.getElementById('pageHeader');
+window.addEventListener('scroll', ()=>{
+  header.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+const sections = document.querySelectorAll('section[id]');
+const navButtons = document.querySelectorAll('.section-nav button');
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      navButtons.forEach(b=>b.classList.toggle('active', b.dataset.target === entry.target.id));
+    }
+  });
+}, { rootMargin: '-40% 0px -50% 0px' });
+sections.forEach(s=>obs.observe(s));
+
+document.getElementById('mobileToggle').addEventListener('click', ()=>{
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+
+/* ---------------- CONTACT FORM ---------------- */
+function sendForm(){
+  document.getElementById('formCard').innerHTML = `
+    <div class="success-box">
+      <div style="font-size:32px;">✅</div>
+      <p style="margin-top:10px; font-weight:600;">Thanks! Your message has been sent.</p>
+    </div>`;
+}
+</script>
+</body>
+</html>
