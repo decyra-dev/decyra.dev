@@ -246,7 +246,6 @@
       <button data-target="architecture">Architecture</button>
       <button data-target="publications">Publications</button>
       <button data-target="speaking">Speaking</button>
-      <button data-target="gallery">Gallery</button>
       <button data-target="contact">Contact</button>
     </nav>
     <div style="display:flex; gap:8px; align-items:center;">
@@ -263,7 +262,6 @@
     <button data-target="architecture">Architecture</button>
     <button data-target="publications">Publications</button>
     <button data-target="speaking">Speaking</button>
-    <button data-target="gallery">Gallery</button>
     <button data-target="contact">Contact</button>
   </div>
 </header>
@@ -412,19 +410,6 @@
     </div>
   </div>
 </section>
-
-<!-- ===== GALLERY ===== -->
-<section id="gallery">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Moments</div>
-      <h2 class="title">Photo Gallery</h2>
-      <p class="sub">Photo gallery placeholder — replace with real event, speaking, and workshop photographs.</p>
-    </div>
-    <div class="grid grid-3" id="galleryGrid"></div>
-  </div>
-</section>
-
 <!-- ===== CONTACT ===== -->
 <section id="contact">
   <div class="wrap">
@@ -546,8 +531,6 @@ const SPEAKING = [
   { title:"Google / Infosys Reimagine 2023 Hackathon", event:"Recognized Participant", type:"Recognition" },
 ];
 
-const GALLERY = ["NASSCOM Webinar Session","Infosys Reimagine Hackathon","Architecture Workshop","Client Engagement","Team Mentoring","Conference Networking"];
-
 /* ---------------- RENDER ---------------- */
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -619,8 +602,6 @@ document.getElementById('speakGrid').innerHTML = SPEAKING.map(s => `
     <p>${s.event}</p>
   </div>
 `).join('');
-
-document.getElementById('galleryGrid').innerHTML = GALLERY.map(g => `<div class="gal-tile">${g}</div>`).join('');
 
 /* ---------------- SEARCH ---------------- */
 const searchable = [
